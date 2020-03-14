@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SuperUpdate
@@ -16,7 +10,6 @@ namespace SuperUpdate
         {
             InitializeComponent();
             Icon = Properties.Resources.supersuite;
-           
         }
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -28,6 +21,11 @@ namespace SuperUpdate
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private void Main_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            new About().ShowDialog();
+            e.Cancel = true;
         }
     }
 }

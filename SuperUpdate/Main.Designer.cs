@@ -49,12 +49,13 @@
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(390, 64);
             this.lblMessage.TabIndex = 0;
-            this.lblMessage.Text = "Initializing...";
+            this.lblMessage.Text = "Starting Super Update...";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnAction
             // 
             this.btnAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAction.Enabled = false;
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAction.Location = new System.Drawing.Point(313, 12);
             this.btnAction.Name = "btnAction";
@@ -107,6 +108,7 @@
             // 
             // lblMoreLessInfo
             // 
+            this.lblMoreLessInfo.Enabled = false;
             this.lblMoreLessInfo.Location = new System.Drawing.Point(38, 15);
             this.lblMoreLessInfo.Name = "lblMoreLessInfo";
             this.lblMoreLessInfo.Size = new System.Drawing.Size(103, 14);
@@ -115,6 +117,7 @@
             // 
             // pbArrow
             // 
+            this.pbArrow.Enabled = false;
             this.pbArrow.Image = global::SuperUpdate.Properties.Resources.downarrowlight;
             this.pbArrow.Location = new System.Drawing.Point(12, 12);
             this.pbArrow.Name = "pbArrow";
@@ -134,16 +137,18 @@
             this.Controls.Add(this.lblMessage);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.HelpButton = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(500, 300);
+            this.MaximumSize = new System.Drawing.Size(500, 170);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 170);
             this.Name = "Main";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update - Super Suite";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.Main_HelpButtonClicked);
             this.pnlGray.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbArrow)).EndInit();
             this.ResumeLayout(false);

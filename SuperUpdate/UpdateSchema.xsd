@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="SuperGrate">
+  <xs:element name="SuperUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="Settings" minOccurs="1" maxOccurs="1">
+        <xs:element name="Settings" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Redirect" minOccurs="0" maxOccurs="1">
@@ -15,15 +15,15 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Updates" minOccurs="1" maxOccurs="1">
+        <xs:element name="Updates" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Update">
+              <xs:element name="Update" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="File" minOccurs="1" maxOccurs="unbounded">
                       <xs:complexType>
-                        <xs:attribute name="Hash" type="xs:string" use="required" />
+                        <xs:attribute name="SHA1" type="xs:string" use="required" />
                         <xs:attribute name="Path" type="xs:string" use="required" />
                       </xs:complexType>
                     </xs:element>
