@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SuperGrate UpdaterVersion="0">
+  <Settings>
+    <Redirect RedirectURL="https://api.belowaverage.org/v1/SuperUpdate/Updates/" UpdaterVersion="0" />
+  </Settings>
+  <Updates>
+    <Update Version="1.1.1.1" DateTime="2000-01-01T00:00:00" Channel="PRERELEASE" ReleaseInfoURL="https://github.com/belowaverage-org/SuperUpdate/releases/tag/1.1.1.1" >
+      <File Hash="9E95275A3B912AEB9992B0B82CA829C5EF102992" Path=".\SuperUpdate.exe" />
+      <Script URL="https://update.belowaverage.org/bin/SuperUpdate_1.1.1.1.ps1" />
+    </Update>
+  </Updates>
+</SuperGrate>

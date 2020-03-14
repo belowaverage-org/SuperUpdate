@@ -74,12 +74,18 @@
   <ItemGroup>
     <None Include="Resources\spinner" />
     <None Include="Resources\supersuite.ico" />
+    <None Include="UpdateSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\downarrow.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\downarrowlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UpdateSchemaExample.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

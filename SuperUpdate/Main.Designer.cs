@@ -47,7 +47,7 @@
             this.lblMessage.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.Location = new System.Drawing.Point(82, 12);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(355, 64);
+            this.lblMessage.Size = new System.Drawing.Size(390, 64);
             this.lblMessage.TabIndex = 0;
             this.lblMessage.Text = "Initializing...";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -56,7 +56,7 @@
             // 
             this.btnAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAction.Location = new System.Drawing.Point(278, 12);
+            this.btnAction.Location = new System.Drawing.Point(313, 12);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(75, 23);
             this.btnAction.TabIndex = 1;
@@ -68,7 +68,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCancel.Location = new System.Drawing.Point(363, 12);
+            this.btnCancel.Location = new System.Drawing.Point(398, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -100,9 +100,9 @@
             this.pnlGray.Controls.Add(this.btnAction);
             this.pnlGray.Controls.Add(this.btnCancel);
             this.pnlGray.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlGray.Location = new System.Drawing.Point(0, 90);
+            this.pnlGray.Location = new System.Drawing.Point(0, 86);
             this.pnlGray.Name = "pnlGray";
-            this.pnlGray.Size = new System.Drawing.Size(449, 45);
+            this.pnlGray.Size = new System.Drawing.Size(484, 45);
             this.pnlGray.TabIndex = 5;
             // 
             // lblMoreLessInfo
@@ -128,7 +128,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(449, 135);
+            this.ClientSize = new System.Drawing.Size(484, 131);
             this.Controls.Add(this.pnlGray);
             this.Controls.Add(this.wbAnimation);
             this.Controls.Add(this.lblMessage);
@@ -137,7 +137,9 @@
             this.HelpButton = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(500, 300);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(500, 170);
             this.Name = "Main";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
