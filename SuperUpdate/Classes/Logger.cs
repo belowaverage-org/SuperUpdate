@@ -4,12 +4,12 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SuperUpdate
+namespace SuperUpdate.Log
 {
     class Logger
     {
         public static int MaxLogsToDraw = 100;
-        public static void Log(string Message, LogItem.LogSeverity Severity = LogItem.LogSeverity.Verbose)
+        public static void Log(string Message, LogLevels Severity = LogLevels.Verbose)
         {
             LogItems.Add(new LogItem(Message, Severity));
             Refresh();
@@ -33,7 +33,7 @@ namespace SuperUpdate
                 foreach (LogItem logItem in LogItems)
                 {
                     writer.WriteLine(
-                        logItem.Severity.ToString() + " : " +
+                        logItem.Level.ToString() + " : " +
                         logItem.TimeStamp.ToString() + " > " +
                         logItem.Message
                     );
@@ -52,7 +52,7 @@ namespace SuperUpdate
         }
         private static Delegate DrawLogs = new Action(() => {
             LogItem LastInfo = LogItems.FindLast(new Predicate<LogItem>((x) => {
-                if (x.Severity == LogItem.LogSeverity.Information) return true;
+                if (x.Level == LogLevels.Information) return true;
                 return false;
             }));
             if (LastInfo != null) Program.MainForm.lblMessage.Text = LastInfo.Message;
@@ -78,11 +78,11 @@ namespace SuperUpdate
             {
                 ListViewItem item = lv.Items.Add("");
                 if (
-                    logItem.Severity == LogItem.LogSeverity.Verbose ||
-                    logItem.Severity == LogItem.LogSeverity.Information
+                    logItem.Level == LogLevels.Verbose ||
+                    logItem.Level == LogLevels.Information
                 ) item.ImageKey = "info";
-                if (logItem.Severity == LogItem.LogSeverity.Warning) item.ImageKey = "warn";
-                if (logItem.Severity == LogItem.LogSeverity.Exception) item.ImageKey = "error";
+                if (logItem.Level == LogLevels.Warning) item.ImageKey = "warn";
+                if (logItem.Level == LogLevels.Exception) item.ImageKey = "error";
                 item.SubItems.Add(logItem.TimeStamp.ToLongTimeString());
                 item.SubItems.Add(logItem.Message);
             }
@@ -98,19 +98,19 @@ namespace SuperUpdate
     class LogItem
     {
         public DateTime TimeStamp = DateTime.Now;
-        public LogSeverity Severity = LogSeverity.Information;
+        public LogLevels Level = LogLevels.Information;
         public string Message = "";
-        public LogItem(string Message, LogSeverity Severity = LogSeverity.Information)
+        public LogItem(string Message, LogLevels Severity = LogLevels.Information)
         {
             this.Message = Message;
-            this.Severity = Severity;
+            Level = Severity;
         }
-        public enum LogSeverity
-        {
-            Information,
-            Warning,
-            Exception,
-            Verbose
-        }
+    }
+    public enum LogLevels
+    {
+        Information,
+        Warning,
+        Exception,
+        Verbose
     }
 }

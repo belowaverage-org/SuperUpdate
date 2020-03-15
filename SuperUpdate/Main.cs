@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using SuperUpdate.Log;
 
 namespace SuperUpdate
 {
@@ -32,7 +33,7 @@ namespace SuperUpdate
             Logger.Initialize();
             Logger.Log("Super Update: v" + ProductVersion.ToString());
             Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
-            Logger.Log("Starting Super Update...", LogItem.LogSeverity.Information);
+            Logger.Log("Starting Super Update...", LogLevels.Information);
             
         }
         private async void miSaveLog_Click(object sender, EventArgs e)
