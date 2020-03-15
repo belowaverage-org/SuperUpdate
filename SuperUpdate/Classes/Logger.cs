@@ -9,10 +9,9 @@ namespace SuperUpdate
     class Logger
     {
         public static int MaxLogsToDraw = 100;
-        public static void Log(string Message, LogItem.LogSeverity Severity = LogItem.LogSeverity.Information)
+        public static void Log(string Message, LogItem.LogSeverity Severity = LogItem.LogSeverity.Verbose)
         {
             LogItems.Add(new LogItem(Message, Severity));
-            if (Severity == LogItem.LogSeverity.Verbose) return;
             Refresh();
         }
         public static void Refresh()
@@ -56,7 +55,7 @@ namespace SuperUpdate
                 if (x.Severity == LogItem.LogSeverity.Information) return true;
                 return false;
             }));
-            Program.MainForm.lblMessage.Text = LastInfo.Message;
+            if (LastInfo != null) Program.MainForm.lblMessage.Text = LastInfo.Message;
             ListView lv = Program.MainForm.lvDetails;
             lv.BeginUpdate();
             lv.SuspendLayout();
@@ -77,9 +76,11 @@ namespace SuperUpdate
             }
             foreach(LogItem logItem in logItems)
             {
-                if (logItem.Severity == LogItem.LogSeverity.Verbose) continue;
                 ListViewItem item = lv.Items.Add("");
-                if (logItem.Severity == LogItem.LogSeverity.Information) item.ImageKey = "info";
+                if (
+                    logItem.Severity == LogItem.LogSeverity.Verbose ||
+                    logItem.Severity == LogItem.LogSeverity.Information
+                ) item.ImageKey = "info";
                 if (logItem.Severity == LogItem.LogSeverity.Warning) item.ImageKey = "warn";
                 if (logItem.Severity == LogItem.LogSeverity.Exception) item.ImageKey = "error";
                 item.SubItems.Add(logItem.TimeStamp.ToLongTimeString());

@@ -11,11 +11,13 @@ namespace SuperUpdate
         [STAThread]
         static void Main(string[] args)
         {
+            Arguments = args;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             MainForm = new Main();
             Application.Run(MainForm);
         }
         public static Main MainForm = null;
+        public static string[] Arguments;
     }
 }
