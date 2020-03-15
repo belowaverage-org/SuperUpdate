@@ -9,10 +9,31 @@ namespace SuperUpdate.Log
     class Logger
     {
         public static int MaxLogsToDraw = 100;
-        public static void Log(string Message, LogLevels Severity = LogLevels.Verbose)
+        public static void Log(string Message, LogLevels LogLevel = LogLevels.Verbose)
         {
-            LogItems.Add(new LogItem(Message, Severity));
+            LogItems.Add(new LogItem(Message, LogLevel));
             Refresh();
+        }
+        public static void Log(string Message, Exception Exception)
+        {
+            LogItems.Add(new LogItem(Message, LogLevels.Exception));
+            Log(Exception);
+        }
+        public static void Log(Exception Exception)
+        {
+            LogItems.Add(new LogItem(Exception.Message, LogLevels.Exception));
+            foreach (string line in Exception.StackTrace.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                LogItems.Add(new LogItem(line, LogLevels.Exception));
+            }
+            if(Exception.InnerException != null)
+            {
+                Log(Exception.InnerException);
+            }
+            else
+            {
+                Refresh();
+            }
         }
         public static void Refresh()
         {

@@ -61,6 +61,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Logger.cs" />
+    <Compile Include="Classes\XmlEngine.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

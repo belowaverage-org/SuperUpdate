@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using SuperUpdate.Log;
+using SuperUpdate.Xml;
 
 namespace SuperUpdate
 {
@@ -34,8 +35,26 @@ namespace SuperUpdate
             Logger.Log("Super Update: v" + ProductVersion.ToString());
             Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
             Logger.Log("Starting Super Update...", LogLevels.Information);
-            
+            if (Program.Arguments.Length == 1)
+            {
+                XmlEngine.ReadRemoteXML(Program.Arguments[0]);
+            }
+            else
+            {
+                Logger.Log("XML URL has not been passed to Super Update!", LogLevels.Warning);
+            }
+
+            Timer timer = new Timer();
+            timer.Interval = 1;
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Logger.Log("Hi");
+        }
+
         private async void miSaveLog_Click(object sender, EventArgs e)
         {
             diSaveLog.FileName =
