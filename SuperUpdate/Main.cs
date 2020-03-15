@@ -27,5 +27,41 @@ namespace SuperUpdate
             new About().ShowDialog();
             e.Cancel = true;
         }
+        private void Main_Load(object sender, EventArgs e)
+        {
+            Logger.Initialize();
+            Logger.Log("Super Update: v" + ProductVersion.ToString());
+            Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
+            Logger.Log("Starting Super Update...");
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+        }
+        private async void miSaveLog_Click(object sender, EventArgs e)
+        {
+            diSaveLog.FileName =
+            "SuperUpdate_" +
+            DateTime.Now.ToShortDateString().Replace('/', '-') + "_" +
+            DateTime.Now.ToLongTimeString().Replace(':', '-');
+            if (diSaveLog.ShowDialog() == DialogResult.OK)
+            {
+                await Logger.WriteLog(diSaveLog.OpenFile());
+            }
+        }
+        private void lvDetails_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                miLog.Show(lvDetails, e.Location);
+            }
+        }
+
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                miSaveLog.PerformClick();
+            }
+        }
     }
 }

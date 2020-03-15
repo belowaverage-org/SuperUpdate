@@ -55,6 +55,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Logger.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,10 +93,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\banner.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\warn.png" />
     <Content Include="UpdateSchemaExample.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
