@@ -43,16 +43,6 @@ namespace SuperUpdate
             {
                 Logger.Log("XML URL has not been passed to Super Update!", LogLevels.Warning);
             }
-
-            Timer timer = new Timer();
-            timer.Interval = 1;
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            Logger.Log("Hi");
         }
 
         private async void miSaveLog_Click(object sender, EventArgs e)
