@@ -37,14 +37,13 @@ namespace SuperUpdate
             Logger.Log("Starting Super Update...", LogLevels.Information);
             if (Program.Arguments.Length == 1)
             {
-                XmlEngine.ReadRemoteXML(Program.Arguments[0]);
+                XmlEngine.ReadXML(Program.Arguments[0]);
             }
             else
             {
                 Logger.Log("XML URL has not been passed to Super Update!", LogLevels.Warning);
             }
         }
-
         private async void miSaveLog_Click(object sender, EventArgs e)
         {
             diSaveLog.FileName =
@@ -63,7 +62,6 @@ namespace SuperUpdate
                 miLog.Show(lvDetails, e.Location);
             }
         }
-
         private void Main_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)

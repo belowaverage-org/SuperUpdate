@@ -131,6 +131,25 @@ namespace SuperUpdate.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;xs:schema attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;qualified&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;xs:element name=&quot;SuperUpdate&quot;&gt;
+        ///    &lt;xs:complexType&gt;
+        ///      &lt;xs:sequence&gt;
+        ///        &lt;xs:element name=&quot;Settings&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;&gt;
+        ///          &lt;xs:complexType&gt;
+        ///            &lt;xs:sequence&gt;
+        ///              &lt;xs:element name=&quot;Redirect&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot;&gt;
+        ///                &lt;xs:complexType&gt;
+        ///                  &lt;xs:attribute name=&quot;Redire [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string UpdateSchema {
+            get {
+                return ResourceManager.GetString("UpdateSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap warn {

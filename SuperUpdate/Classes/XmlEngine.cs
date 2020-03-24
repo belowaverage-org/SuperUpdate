@@ -1,33 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Schema;
-using System.Net.Http;
 using SuperUpdate.Log;
+using System.IO;
 
 namespace SuperUpdate.Xml
 {
     class XmlEngine
     {
-        private static HttpClient HttpClient = new HttpClient();
-        public async static void ReadRemoteXML(string XmlURL)
+        public static int MaxRedirects = 10;
+        public static XmlDocument UpdateXML = null;
+        public static Task ReadXML(string URI)
         {
-            try
-            {
-                Logger.Log("Retrieving list of updates...", LogLevels.Information);
-                Logger.Log("Reading URL: " + XmlURL + "...");
-                HttpResponseMessage message = await HttpClient.GetAsync(XmlURL);
-                string XML = await message.Content.ReadAsStringAsync();
-                Logger.Log(XML);
-            }
-            catch (Exception e)
-            {
-                Logger.Log("Could not retrieve list of updates!", e);
-            }
+            return Task.Run(async () => {
+                try
+                {
+                    UpdateXML = new XmlDocument();
+                    Logger.Log("Retrieving list of updates...", LogLevels.Information);
+                    Logger.Log("Reading XML: " + URI + "...");
+                    StringReader schemaReader = new StringReader(Properties.Resources.UpdateSchema);
+                    UpdateXML.Schemas.Add(XmlSchema.Read(schemaReader, SchemaReadError));
+                    UpdateXML.Load(URI);
+                    Logger.Log("Validating Update XML...");
+                    UpdateXML.Validate(ValidationError);
+                    Logger.Log("Update XML has been read and validated!");
+                    XmlNode redirect = UpdateXML.SelectSingleNode("/SuperUpdate/Settings/Redirect");
+                    if (redirect != null)
+                    {
+                        Logger.Log("XML Redirect Found! Redirecting...");
+                        if (RedirectCount++ >= MaxRedirects)
+                        {
+                            Logger.Log("Followed too many redirects! The limit is: " + MaxRedirects + ".", LogLevels.Warning);
+                        }
+                        else
+                        {
+                            await ReadXML(redirect.Attributes["RedirectURL"].Value);
+                        }
+                    }
+                    RedirectCount = 0;
+                }
+                catch (Exception e)
+                {
+                    Logger.Log("Could not retrieve list of updates!", e);
+                }
+            });
+        }
+        private static int RedirectCount = 0;
+        private static void SchemaReadError(object Sender, ValidationEventArgs Event)
+        {
+            Logger.Log("UpdateSchema.xsd is not valid!", Event.Exception);
+        }
+        private static void ValidationError(object Sender, ValidationEventArgs Event)
+        {
+            Logger.Log("Not a valid Super Update XML!", Event.Exception);
         }
     }
 }
