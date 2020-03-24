@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using SuperUpdate.Log;
 using SuperUpdate.Xml;
+using SuperUpdate.Update;
 
 namespace SuperUpdate
 {
@@ -29,7 +30,7 @@ namespace SuperUpdate
             new About().ShowDialog();
             e.Cancel = true;
         }
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
             Logger.Initialize();
             Logger.Log("Super Update: v" + ProductVersion.ToString());
@@ -37,7 +38,8 @@ namespace SuperUpdate
             Logger.Log("Starting Super Update...", LogLevels.Information);
             if (Program.Arguments.Length == 1)
             {
-                XmlEngine.ReadXML(Program.Arguments[0]);
+                await XmlEngine.ReadXML(Program.Arguments[0]);
+                UpdateEngine.DetectCurrentVersion();
             }
             else
             {

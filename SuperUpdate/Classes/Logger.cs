@@ -88,6 +88,18 @@ namespace SuperUpdate.Log
             ImageList.Images.Add("info", Properties.Resources.info);
             ImageList.Images.Add("warn", Properties.Resources.warn);
             ImageList.Images.Add("error", Properties.Resources.error);
+            ClearAllLogs();
+        }
+        public static void DrawAllLogs()
+        {
+            ClearAllLogs();
+            LogLock.EnterWriteLock();
+            foreach(LogItem log in LogItems) log.Drawn = false;
+            LogLock.ExitWriteLock();
+            DrawNewLogs();
+        }
+        private static void ClearAllLogs()
+        {
             ListView lv = Program.MainForm.lvDetails;
             lv.SmallImageList = ImageList;
             lv.Columns.Clear();
