@@ -11,10 +11,10 @@ namespace SuperUpdate.Update
 {
     class UpdateEngine
     {
+        public static XmlNode CurrentVersion = null;
         public async static Task<bool> DetectCurrentVersion()
         {
             Logger.Log("Detecting current version...", LogLevels.Information);
-            bool FoundMatch = false;
             foreach(XmlNode update in XmlEngine.UpdateXML.SelectNodes("/SuperUpdate/Updates/Update"))
             {
                 bool ThisUpdateMatches = true;
@@ -28,20 +28,13 @@ namespace SuperUpdate.Update
                 }
                 if (ThisUpdateMatches)
                 {
-                    FoundMatch = true;
-                    break;
+                    Logger.Log("Detected current version! Channel: " + update.Attributes["Channel"].Value + ", Version: " + update.Attributes["Version"].Value + ".");
+                    CurrentVersion = update;
+                    return true;
                 }
             }
-            if(FoundMatch)
-            {
-                Logger.Log("Detected current version!");
-                return true;
-            }
-            else
-            {
-                Logger.Log("Could not detect current version!", LogLevels.Warning);
-                return false;
-            }
+            Logger.Log("Could not detect current version!", LogLevels.Warning);
+            return false;
         }
         private static SHA1 HashObject = SHA1.Create();
         private static Dictionary<string, string> LocalFiles = new Dictionary<string, string>();

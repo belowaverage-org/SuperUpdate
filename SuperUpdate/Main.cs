@@ -9,10 +9,20 @@ namespace SuperUpdate
 {
     public partial class Main : Form
     {
+        private bool IsRunning;
         public Main()
         {
             InitializeComponent();
             Icon = Properties.Resources.supersuite;
+        }
+        private bool Running
+        {
+            get { return IsRunning; }
+            set 
+            {
+                IsRunning = value;
+                btnAction.Enabled = !value;
+            }
         }
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -30,21 +40,27 @@ namespace SuperUpdate
             new About().ShowDialog();
             e.Cancel = true;
         }
-        private async void Main_Load(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
+            Running = true;
             Logger.Initialize();
             Logger.Log("Super Update: v" + ProductVersion.ToString());
             Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
             Logger.Log("Starting Super Update...", LogLevels.Information);
             if (Program.Arguments.Length == 1)
             {
-                if (!await XmlEngine.ReadXML(Program.Arguments[0])) return;
-                if (!await UpdateEngine.DetectCurrentVersion()) return;
+                CheckForUpdates();
             }
             else
             {
                 Logger.Log("XML path has not been passed to Super Update!", LogLevels.Warning);
             }
+            Running = false;
+        }
+        private async void CheckForUpdates()
+        {
+            if (!await XmlEngine.ReadXML(Program.Arguments[0])) return;
+            if (!await UpdateEngine.DetectCurrentVersion()) return;
         }
         private async void miSaveLog_Click(object sender, EventArgs e)
         {
@@ -59,7 +75,7 @@ namespace SuperUpdate
         }
         private void lvDetails_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 miLog.Show(lvDetails, e.Location);
             }
@@ -70,6 +86,12 @@ namespace SuperUpdate
             {
                 miSaveLog.PerformClick();
             }
+        }
+        private void btnAction_Click(object sender, EventArgs e)
+        {
+            Running = true;
+            CheckForUpdates();
+            Running = false;
         }
     }
 }

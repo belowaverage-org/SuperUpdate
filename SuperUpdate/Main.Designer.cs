@@ -59,7 +59,6 @@
             // btnAction
             // 
             this.btnAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAction.Enabled = false;
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnAction.Location = new System.Drawing.Point(807, 12);
             this.btnAction.Name = "btnAction";
@@ -67,6 +66,7 @@
             this.btnAction.TabIndex = 1;
             this.btnAction.Text = "Check Again";
             this.btnAction.UseVisualStyleBackColor = true;
+            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // btnCancel
             // 
@@ -112,7 +112,6 @@
             // 
             // lblMoreLessInfo
             // 
-            this.lblMoreLessInfo.Enabled = false;
             this.lblMoreLessInfo.Location = new System.Drawing.Point(38, 15);
             this.lblMoreLessInfo.Name = "lblMoreLessInfo";
             this.lblMoreLessInfo.Size = new System.Drawing.Size(103, 14);
@@ -121,7 +120,6 @@
             // 
             // pbArrow
             // 
-            this.pbArrow.Enabled = false;
             this.pbArrow.Image = global::SuperUpdate.Properties.Resources.downarrowlight;
             this.pbArrow.Location = new System.Drawing.Point(12, 12);
             this.pbArrow.Name = "pbArrow";
