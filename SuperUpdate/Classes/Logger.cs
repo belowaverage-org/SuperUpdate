@@ -28,9 +28,12 @@ namespace SuperUpdate.Log
         {
             LogLock.EnterWriteLock();
             LogItems.Add(new LogItem(Exception.Message, LogLevels.Exception));
-            foreach (string line in Exception.StackTrace.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+            if (Exception.StackTrace != null)
             {
-                LogItems.Add(new LogItem(line, LogLevels.Exception));
+                foreach (string line in Exception.StackTrace.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    LogItems.Add(new LogItem(line, LogLevels.Exception));
+                }
             }
             LogLock.ExitWriteLock();
             if (Exception.InnerException != null)

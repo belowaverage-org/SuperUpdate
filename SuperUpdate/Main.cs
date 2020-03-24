@@ -38,12 +38,12 @@ namespace SuperUpdate
             Logger.Log("Starting Super Update...", LogLevels.Information);
             if (Program.Arguments.Length == 1)
             {
-                await XmlEngine.ReadXML(Program.Arguments[0]);
-                UpdateEngine.DetectCurrentVersion();
+                if (!await XmlEngine.ReadXML(Program.Arguments[0])) return;
+                if (!await UpdateEngine.DetectCurrentVersion()) return;
             }
             else
             {
-                Logger.Log("XML URL has not been passed to Super Update!", LogLevels.Warning);
+                Logger.Log("XML path has not been passed to Super Update!", LogLevels.Warning);
             }
         }
         private async void miSaveLog_Click(object sender, EventArgs e)
