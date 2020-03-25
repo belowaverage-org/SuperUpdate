@@ -4,12 +4,15 @@ using System.Windows.Forms;
 using SuperUpdate.Log;
 using SuperUpdate.Xml;
 using SuperUpdate.Update;
+using System.Drawing;
 
 namespace SuperUpdate
 {
     public partial class Main : Form
     {
-        private bool IsRunning;
+        private bool IsRunning = false;
+        private bool IsExpanded = false;
+        private bool IsMouseOverArrow = false;
         public Main()
         {
             InitializeComponent();
@@ -18,10 +21,28 @@ namespace SuperUpdate
         private bool Running
         {
             get { return IsRunning; }
-            set 
+            set
             {
                 IsRunning = value;
                 btnAction.Enabled = !value;
+            }
+        }
+        private bool Expanded
+        {
+            get { return IsExpanded; }
+            set
+            {
+                IsExpanded = value;
+                if (IsExpanded)
+                {
+                    //Disable Log list View Here.
+                    lblMoreLessInfo.Text = "&Less information";
+                }
+                else
+                {
+                    lblMoreLessInfo.Text = "&More information";
+                }
+                pbArrow.Invalidate();
             }
         }
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -55,7 +76,8 @@ namespace SuperUpdate
             {
                 Logger.Log("XML path has not been passed to Super Update!", LogLevels.Warning);
             }
-            Running = false;
+            Running = Expanded = false;
+            CheckIfExpanded();
         }
         private async void CheckForUpdates()
         {
@@ -92,6 +114,48 @@ namespace SuperUpdate
             Running = true;
             CheckForUpdates();
             Running = false;
+        }
+        private void ExpandContract(object sender, EventArgs e)
+        {
+            if (Expanded)
+            {
+                Size = MinimumSize;
+            }
+            else
+            {
+                Size = new Size(800, 500);
+            }
+            CenterToScreen();
+        }
+        private void CheckIfExpanded(object sender = null, EventArgs e = null)
+        {
+            if(Expanded != (Size.Height != MinimumSize.Height))
+            {
+                Expanded = Size.Height != MinimumSize.Height;
+            }
+        }
+        private void pbArrow_MouseEnter(object sender, EventArgs e)
+        {
+            IsMouseOverArrow = true;
+            pbArrow.Invalidate();
+        }
+        private void pbArrow_MouseLeave(object sender, EventArgs e)
+        {
+            IsMouseOverArrow = false;
+            pbArrow.Invalidate();
+        }
+        private void pbArrow_Paint(object sender, PaintEventArgs e)
+        {
+            Image arrow = new Bitmap(Properties.Resources.downarrow);
+            if (Expanded) arrow.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            Graphics g = e.Graphics;
+            g.Clear(Color.WhiteSmoke);
+            g.DrawImage(arrow, 0, 0, pbArrow.Width, pbArrow.Height);
+            if (!IsMouseOverArrow)
+            {
+                g.FillRectangle(new SolidBrush(Color.FromArgb(50, Color.WhiteSmoke)), 0, 0, pbArrow.Width, pbArrow.Height);
+            }
+            arrow.Dispose();
         }
     }
 }
