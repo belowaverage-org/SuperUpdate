@@ -35,11 +35,12 @@ namespace SuperUpdate
                 IsExpanded = value;
                 if (IsExpanded)
                 {
-                    //Disable Log list View Here.
+                    lvDetails.Show();
                     lblMoreLessInfo.Text = "&Less information";
                 }
                 else
                 {
+                    lvDetails.Hide();
                     lblMoreLessInfo.Text = "&More information";
                 }
                 pbArrow.Invalidate();
