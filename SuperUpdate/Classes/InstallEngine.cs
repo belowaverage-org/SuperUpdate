@@ -8,5 +8,9 @@ namespace SuperUpdate.Install
 {
     class InstallEngine
     {
+        public static void InstallUpdate()
+        {
+
+        }
     }
 }
