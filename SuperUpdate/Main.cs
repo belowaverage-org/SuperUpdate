@@ -5,6 +5,7 @@ using SuperUpdate.Log;
 using SuperUpdate.Xml;
 using SuperUpdate.Update;
 using System.Drawing;
+using System.Xml;
 
 namespace SuperUpdate
 {
@@ -83,7 +84,12 @@ namespace SuperUpdate
         private async void CheckForUpdates()
         {
             if (!await XmlEngine.ReadXML(Program.Arguments[0])) return;
-            if (!await UpdateEngine.DetectCurrentVersion()) return;
+            if (!await UpdateEngine.DetectUpdates()) return;
+            
+        }
+        private void DisplayUpdates()
+        {
+            
         }
         private async void miSaveLog_Click(object sender, EventArgs e)
         {
