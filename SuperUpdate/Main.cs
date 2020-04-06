@@ -6,11 +6,16 @@ using SuperUpdate.Xml;
 using SuperUpdate.Update;
 using System.Drawing;
 using System.Xml;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace SuperUpdate
 {
     public partial class Main : Form
     {
+        public Size ExpandedSize = new Size(800, 500);
+        public string LargeImageStatic = "";
+        public string LargeImageSpinner = "";
         private bool IsRunning = false;
         private bool IsExpanded = false;
         private bool IsMouseOverArrow = false;
@@ -25,6 +30,15 @@ namespace SuperUpdate
             set
             {
                 IsRunning = value;
+                if (IsRunning)
+                {
+                    pbMain.Style = ProgressBarStyle.Marquee;
+                }
+                else
+                {
+                    pbMain.Style = ProgressBarStyle.Continuous;
+                }
+                RefreshLargeIcon();
                 btnAction.Enabled = !value;
             }
         }
@@ -47,12 +61,14 @@ namespace SuperUpdate
                 pbArrow.Invalidate();
             }
         }
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        public void RefreshLargeIcon(object sender = null, WebBrowserDocumentCompletedEventArgs e = null)
         {
+            string LargeImage = "";
+            if (wbAnimation.Document.Body == null) return;
+            if (!Running) LargeImage = LargeImageStatic;
+            if (Running) LargeImage = LargeImageSpinner;
             wbAnimation.Document.Body.Style = "margin:0px;";
-            string gif = Convert.ToBase64String(Properties.Resources.spinner);
-            gif = "<img ondragstart=\"return false;\" style=\"width:100%;height:100%;top:0px;left:0px;position:fixed;\" src=\"data:image/gif;base64," + gif + "\" />";
-            wbAnimation.Document.Body.InnerHtml = gif;
+            wbAnimation.Document.Body.InnerHtml = "<img ondragstart=\"return false;\" style=\"width:100%;height:100%;top:0px;left:0px;position:fixed;\" src=\"" + LargeImage + "\" />";
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -63,32 +79,30 @@ namespace SuperUpdate
             new About().ShowDialog();
             e.Cancel = true;
         }
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
             Running = true;
+            await GetImagesFromResources();
+            Expanded = false;
+            CheckIfExpanded();
             Logger.Initialize();
             Logger.Log("Super Update: v" + ProductVersion.ToString());
             Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
             Logger.Log("Starting Super Update...", LogLevels.Information);
             if (Program.Arguments.Length == 1)
             {
-                CheckForUpdates();
+                await CheckForUpdates();
             }
             else
             {
                 Logger.Log("XML path has not been passed to Super Update!", LogLevels.Warning);
             }
-            Running = Expanded = false;
-            CheckIfExpanded();
+            Running = false;
         }
-        private async void CheckForUpdates()
+        private async Task CheckForUpdates()
         {
             if (!await XmlEngine.ReadXML(Program.Arguments[0])) return;
             if (!await UpdateEngine.DetectUpdates()) return;
-            
-        }
-        private void DisplayUpdates()
-        {
             
         }
         private async void miSaveLog_Click(object sender, EventArgs e)
@@ -116,10 +130,10 @@ namespace SuperUpdate
                 miSaveLog.PerformClick();
             }
         }
-        private void btnAction_Click(object sender, EventArgs e)
+        private async void btnAction_Click(object sender, EventArgs e)
         {
             Running = true;
-            CheckForUpdates();
+            await CheckForUpdates();
             Running = false;
         }
         private void ExpandContract(object sender, EventArgs e)
@@ -130,7 +144,7 @@ namespace SuperUpdate
             }
             else
             {
-                Size = new Size(800, 500);
+                Size = ExpandedSize;
             }
             CenterToScreen();
         }
@@ -164,5 +178,26 @@ namespace SuperUpdate
             }
             arrow.Dispose();
         }
+        private Task GetImagesFromResources()
+        {
+            return Task.Run(() => {
+                MemoryStream stream = new MemoryStream();
+                Bitmap btm = new Bitmap(64, 64);
+                Graphics g = Graphics.FromImage(btm);
+                g.DrawIcon(new Icon(Properties.Resources.supersuite, 48, 48), 8, 8);
+                btm.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                g.Dispose();
+                string img = Convert.ToBase64String(stream.GetBuffer());
+                stream.Dispose();
+                LargeImageStatic = "data:image/png;base64," + img;
+                string gif = Convert.ToBase64String(Properties.Resources.spinner);
+                LargeImageSpinner = "data:image/gif;base64," + gif;
+            });
+        }
+        public void CenterWindow()
+        {
+            CenterToScreen();
+        }
+        //public void 
     }
 }

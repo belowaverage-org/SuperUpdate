@@ -52,7 +52,7 @@
             this.lblMessage.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.Location = new System.Drawing.Point(82, 12);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(690, 64);
+            this.lblMessage.Size = new System.Drawing.Size(390, 64);
             this.lblMessage.TabIndex = 0;
             this.lblMessage.Text = "Initializing...";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -61,7 +61,7 @@
             // 
             this.btnAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAction.Location = new System.Drawing.Point(613, 12);
+            this.btnAction.Location = new System.Drawing.Point(313, 12);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(75, 23);
             this.btnAction.TabIndex = 1;
@@ -74,7 +74,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCancel.Location = new System.Drawing.Point(698, 12);
+            this.btnCancel.Location = new System.Drawing.Point(398, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -96,7 +96,7 @@
             this.wbAnimation.TabIndex = 4;
             this.wbAnimation.Url = new System.Uri("", System.UriKind.Relative);
             this.wbAnimation.WebBrowserShortcutsEnabled = false;
-            this.wbAnimation.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            this.wbAnimation.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.RefreshLargeIcon);
             // 
             // pnlGray
             // 
@@ -106,9 +106,9 @@
             this.pnlGray.Controls.Add(this.btnAction);
             this.pnlGray.Controls.Add(this.btnCancel);
             this.pnlGray.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlGray.Location = new System.Drawing.Point(0, 416);
+            this.pnlGray.Location = new System.Drawing.Point(0, 116);
             this.pnlGray.Name = "pnlGray";
-            this.pnlGray.Size = new System.Drawing.Size(784, 45);
+            this.pnlGray.Size = new System.Drawing.Size(484, 45);
             this.pnlGray.TabIndex = 5;
             // 
             // lblMoreLessInfo
@@ -146,7 +146,7 @@
             this.lvDetails.Location = new System.Drawing.Point(12, 117);
             this.lvDetails.MultiSelect = false;
             this.lvDetails.Name = "lvDetails";
-            this.lvDetails.Size = new System.Drawing.Size(760, 288);
+            this.lvDetails.Size = new System.Drawing.Size(460, 0);
             this.lvDetails.TabIndex = 6;
             this.lvDetails.UseCompatibleStateImageBehavior = false;
             this.lvDetails.View = System.Windows.Forms.View.Details;
@@ -176,7 +176,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbMain.Location = new System.Drawing.Point(12, 87);
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(760, 15);
+            this.pbMain.Size = new System.Drawing.Size(460, 15);
             this.pbMain.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.pbMain.TabIndex = 7;
             // 
@@ -186,7 +186,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(484, 161);
             this.Controls.Add(this.pbMain);
             this.Controls.Add(this.lvDetails);
             this.Controls.Add(this.pnlGray);

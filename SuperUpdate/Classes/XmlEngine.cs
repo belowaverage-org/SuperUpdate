@@ -4,6 +4,8 @@ using System.Xml;
 using System.Xml.Schema;
 using SuperUpdate.Log;
 using System.IO;
+using System.Drawing;
+using System.Net.Http;
 
 namespace SuperUpdate.Xml
 {
@@ -11,6 +13,8 @@ namespace SuperUpdate.Xml
     {
         public static int MaxRedirects = 10;
         public static XmlDocument UpdateXML = null;
+        private static int RedirectCount = 0;
+        private static HttpClient HttpClient = new HttpClient();
         public static Task<bool> ReadXML(string URI)
         {
             return Task.Run(async () => {
@@ -39,6 +43,10 @@ namespace SuperUpdate.Xml
                             result = await ReadXML(redirect.Attributes["RedirectURL"].Value);
                         }
                     }
+                    else
+                    {
+                        ParseSettings();
+                    }
                     RedirectCount = 0;
                     return result;
                 }
@@ -54,10 +62,65 @@ namespace SuperUpdate.Xml
                 }
             });
         }
-        private static int RedirectCount = 0;
         private static void XmlThrowHere(object Sender, ValidationEventArgs Event)
         {
             throw Event.Exception;
         }
+        private static void ParseSettings()
+        {
+            if (Program.MainForm.InvokeRequired)
+            {
+                Program.MainForm.Invoke(ParseSettingsUI);
+            }
+            else
+            {
+                ParseSettingsUI();
+            }
+        }
+        private static Action ParseSettingsUI = new Action(async () => {
+            Main main = Program.MainForm;
+            foreach (XmlNode setting in UpdateXML.SelectNodes("/SuperUpdate/Settings/*"))
+            {
+                if (setting.Name == "WindowTitle")
+                {
+                    main.Text = setting.Attributes["Title"].Value;
+                    continue;
+                }
+                if (setting.Name == "WindowSize")
+                {
+                    string size = setting.Attributes["Size"].Value;
+                    if (size == "Expanded") main.Size = main.ExpandedSize;
+                    if (size == "Contracted") main.Size = main.MinimumSize;
+                    string[] widthHeight = size.Split('x');
+                    if (widthHeight.Length == 2 && size != "Expanded")
+                    {
+                        main.Size = new Size(int.Parse(widthHeight[0]), int.Parse(widthHeight[1]));
+                    }
+                    main.CenterWindow();
+                    continue;
+                }
+                if (setting.Name == "WindowIcon")
+                {
+                    HttpResponseMessage message = await HttpClient.GetAsync(new Uri(setting.Attributes["URL"].Value));
+                    Stream stream = await message.Content.ReadAsStreamAsync();
+                    main.Icon = new Icon(stream);
+                    stream.Close();
+                    message.Dispose();
+                    continue;
+                }
+                if (setting.Name == "WindowIconLarge")
+                {
+                    main.LargeImageStatic = setting.Attributes["URL"].Value;
+                    main.RefreshLargeIcon();
+                    continue;
+                }
+                if (setting.Name == "WindowIconLargeAnimated")
+                {
+                    main.LargeImageSpinner = setting.Attributes["URL"].Value;
+                    main.RefreshLargeIcon();
+                    continue;
+                }
+            }
+        });
     }
 }
