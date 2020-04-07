@@ -60,12 +60,13 @@
             // btnAction
             // 
             this.btnAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAction.Enabled = false;
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnAction.Location = new System.Drawing.Point(313, 12);
+            this.btnAction.Location = new System.Drawing.Point(313, 11);
             this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(75, 23);
+            this.btnAction.Size = new System.Drawing.Size(75, 25);
             this.btnAction.TabIndex = 1;
-            this.btnAction.Text = "Check Again";
+            this.btnAction.Text = "Install";
             this.btnAction.UseVisualStyleBackColor = true;
             this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
@@ -74,9 +75,9 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCancel.Location = new System.Drawing.Point(398, 12);
+            this.btnCancel.Location = new System.Drawing.Point(398, 11);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(75, 25);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -117,6 +118,7 @@
             this.lblMoreLessInfo.Name = "lblMoreLessInfo";
             this.lblMoreLessInfo.Size = new System.Drawing.Size(103, 14);
             this.lblMoreLessInfo.TabIndex = 4;
+            this.lblMoreLessInfo.Text = "Initializing...";
             this.lblMoreLessInfo.Click += new System.EventHandler(this.ExpandContract);
             this.lblMoreLessInfo.MouseEnter += new System.EventHandler(this.pbArrow_MouseEnter);
             this.lblMoreLessInfo.MouseLeave += new System.EventHandler(this.pbArrow_MouseLeave);

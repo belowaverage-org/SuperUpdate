@@ -5,9 +5,10 @@ using SuperUpdate.Log;
 using SuperUpdate.Xml;
 using SuperUpdate.Update;
 using System.Drawing;
-using System.Xml;
 using System.IO;
 using System.Threading.Tasks;
+using System.Reflection;
+using System.Text;
 
 namespace SuperUpdate
 {
@@ -39,7 +40,7 @@ namespace SuperUpdate
                     pbMain.Style = ProgressBarStyle.Continuous;
                 }
                 RefreshLargeIcon();
-                btnAction.Enabled = !value;
+                //btnAction.Enabled = !value;
             }
         }
         private bool Expanded
@@ -79,8 +80,9 @@ namespace SuperUpdate
             new About().ShowDialog();
             e.Cancel = true;
         }
-        private async void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender = null, EventArgs e = null)
         {
+            bool success = true;
             Running = true;
             await GetImagesFromResources();
             Expanded = false;
@@ -89,21 +91,43 @@ namespace SuperUpdate
             Logger.Log("Super Update: v" + ProductVersion.ToString());
             Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
             Logger.Log("Starting Super Update...", LogLevels.Information);
-            if (Program.Arguments.Length == 1)
+            success = await CheckForUpdates();
+            Running = false;
+            if (success)
             {
-                await CheckForUpdates();
+                //Please select an update...
+                Logger.Log("", LogLevels.Information);
             }
             else
             {
-                Logger.Log("XML path has not been passed to Super Update!", LogLevels.Warning);
+                Logger.Log("", LogLevels.Information);
             }
-            Running = false;
         }
-        private async Task CheckForUpdates()
+        private async Task<bool> CheckForUpdates()
         {
-            if (!await XmlEngine.ReadXML(Program.Arguments[0])) return;
-            if (!await UpdateEngine.DetectUpdates()) return;
-            
+            bool success = true;
+            string xmlUrl = "";
+            string[] encodedXML = Assembly.GetExecutingAssembly().ManifestModule.Name.Split('_');
+            if (Program.Arguments.Length == 1)
+            {
+                Logger.Log("XML passed via CLI.");
+                xmlUrl = Program.Arguments[0];
+            }
+            else if (encodedXML.Length == 2)
+            {
+                Logger.Log("XML passed via module name.");
+                xmlUrl = Encoding.UTF8.GetString(Convert.FromBase64String(encodedXML[1].Replace(".exe", "")));
+            }
+            else
+            {
+                Logger.Log("XML path has not been passed to Super Update!", LogLevels.Exception);
+                return false;
+            }
+            success = await XmlEngine.ReadXML(xmlUrl);
+            if (!success) return success;
+            success = await UpdateEngine.DetectUpdates();
+            if (!success) return success;
+            return success;
         }
         private async void miSaveLog_Click(object sender, EventArgs e)
         {
@@ -132,10 +156,13 @@ namespace SuperUpdate
         }
         private async void btnAction_Click(object sender, EventArgs e)
         {
-            Running = true;
-            await CheckForUpdates();
-            Running = false;
+            
         }
+
+        /*
+         * Running = true;
+            await CheckForUpdates();
+            Running = false;*/
         private void ExpandContract(object sender, EventArgs e)
         {
             if (Expanded)
@@ -201,3 +228,4 @@ namespace SuperUpdate
         //public void 
     }
 }
+ 
