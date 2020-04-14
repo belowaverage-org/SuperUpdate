@@ -23,6 +23,8 @@ namespace SuperUpdate
         public Main()
         {
             InitializeComponent();
+            Expanded = false;
+            Size = MinimumSize;
             Icon = Properties.Resources.supersuite;
         }
         private bool Running
@@ -52,12 +54,12 @@ namespace SuperUpdate
                 if (IsExpanded)
                 {
                     lvDetails.Show();
-                    lblMoreLessInfo.Text = "&Less information";
+                    lblMoreLessInfo.Text = "&Fewer details";
                 }
                 else
                 {
                     lvDetails.Hide();
-                    lblMoreLessInfo.Text = "&More information";
+                    lblMoreLessInfo.Text = "&More details";
                 }
                 pbArrow.Invalidate();
             }
@@ -85,8 +87,6 @@ namespace SuperUpdate
             bool success = true;
             Running = true;
             await GetImagesFromResources();
-            Expanded = false;
-            CheckIfExpanded();
             Logger.Initialize();
             Logger.Log("Super Update: v" + ProductVersion.ToString());
             Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
@@ -163,7 +163,7 @@ namespace SuperUpdate
          * Running = true;
             await CheckForUpdates();
             Running = false;*/
-        private void ExpandContract(object sender, EventArgs e)
+        private void ExpandContract(object sender = null, EventArgs e = null)
         {
             if (Expanded)
             {
