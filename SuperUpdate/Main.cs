@@ -96,7 +96,8 @@ namespace SuperUpdate
             if (success)
             {
                 //Please select an update...
-                Logger.Log("", LogLevels.Information);
+                Logger.Log("Custom Message", LogLevels.Information);
+
             }
             else
             {
