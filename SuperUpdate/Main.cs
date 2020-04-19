@@ -93,16 +93,7 @@ namespace SuperUpdate
             Logger.Log("Starting Super Update...", LogLevels.Information);
             success = await CheckForUpdates();
             Running = false;
-            if (success)
-            {
-                //Please select an update...
-                Logger.Log("Custom Message", LogLevels.Information);
-
-            }
-            else
-            {
-                Logger.Log("", LogLevels.Information);
-            }
+            if (!success) Logger.Log("Something went wrong, press \"More details\" for more details.", LogLevels.Information);
         }
         private async Task<bool> CheckForUpdates()
         {
@@ -128,6 +119,21 @@ namespace SuperUpdate
             if (!success) return success;
             success = await UpdateEngine.DetectUpdates();
             if (!success) return success;
+            if (UpdateEngine.CurrentVersion != UpdateEngine.LatestVersion)
+            {
+                if (UpdateEngine.LatestVersion.Attributes["UpdateMessage"] != null)
+                {
+                    Logger.Log(UpdateEngine.LatestVersion.Attributes["UpdateMessage"].Value, LogLevels.Information);
+                }
+                else
+                {
+                    Logger.Log("Found new version, press \"Install\" to begin.", LogLevels.Information);
+                }
+            }
+            else
+            {
+                Logger.Log("No updates are available.", LogLevels.Information);
+            }
             return success;
         }
         private async void miSaveLog_Click(object sender, EventArgs e)

@@ -78,6 +78,7 @@ namespace SuperUpdate.Update
                     return hash;
                 }
                 Logger.Log("File not found!", LogLevels.Warning);
+                LocalFiles.Add(Path, "");
                 return string.Empty;
             });
         }
