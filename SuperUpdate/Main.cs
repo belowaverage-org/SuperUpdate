@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Text;
+using System.Xml;
 
 namespace SuperUpdate
 {
@@ -92,8 +93,15 @@ namespace SuperUpdate
             Logger.Log("Developed by: Dylan Bickerstaff (C) 2020");
             Logger.Log("Starting Super Update...", LogLevels.Information);
             success = await CheckForUpdates();
+            if (!success)
+            {
+                Logger.Log("Something went wrong, press \"More details\" for more details.", LogLevels.Information);
+                Running = false;
+                return;
+            }
+            UpdateSelectEngine upEng = new UpdateSelectEngine(lvDetails);
+            //upEng.Dispose();
             Running = false;
-            if (!success) Logger.Log("Something went wrong, press \"More details\" for more details.", LogLevels.Information);
         }
         private async Task<bool> CheckForUpdates()
         {
@@ -132,7 +140,15 @@ namespace SuperUpdate
             }
             else
             {
-                Logger.Log("No updates are available.", LogLevels.Information);
+                XmlNode noUpdateMessage = XmlEngine.UpdateXML.SelectSingleNode("/SuperUpdate/Settings/MessageNoUpdate");
+                if (noUpdateMessage != null)
+                {
+                    Logger.Log(noUpdateMessage.Attributes["Text"].Value, LogLevels.Information);
+                }
+                else
+                {
+                    Logger.Log("No updates are available.", LogLevels.Information);
+                }
             }
             return success;
         }

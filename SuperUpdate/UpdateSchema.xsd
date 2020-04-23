@@ -43,6 +43,11 @@
                   <xs:attribute name="URL" type="xs:anyURI" use="required" />
                 </xs:complexType>
               </xs:element>
+              <xs:element name="MessageNoUpdate" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:attribute name="Text" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

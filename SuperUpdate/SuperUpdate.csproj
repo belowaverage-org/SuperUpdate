@@ -40,6 +40,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\supersuite.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="About.cs">
       <SubType>Form</SubType>
@@ -50,6 +53,7 @@
     <Compile Include="Classes\InstallEngine.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\UpdateEngine.cs" />
+    <Compile Include="Classes\UpdateSelectEngine.cs" />
     <Compile Include="Classes\XmlEngine.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>

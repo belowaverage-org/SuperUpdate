@@ -10,6 +10,7 @@ namespace SuperUpdate.Log
     class Logger
     {
         public static int MaxLogsToDraw = 100;
+        public static bool DrawEnabled = true;
         public static void Log(string Message, LogLevels LogLevel = LogLevels.Verbose)
         {
             LogLock.EnterWriteLock();
@@ -47,6 +48,7 @@ namespace SuperUpdate.Log
         }
         public static void DrawNewLogs()
         {
+            if (!DrawEnabled) return;
             if (!CanDrawNewLogs)
             {
                 DrawQueued = true;
@@ -86,7 +88,7 @@ namespace SuperUpdate.Log
         {
             RefreshTimer.Interval = 100;
             RefreshTimer.Start();
-            RefreshTimer.Tick += RefreshTimer_Tick;
+            RefreshTimer.Tick += AllowDraw;
             ImageList.ImageSize = new System.Drawing.Size(16, 16);
             ImageList.Images.Add("info", Properties.Resources.info);
             ImageList.Images.Add("warn", Properties.Resources.warn);
@@ -101,6 +103,11 @@ namespace SuperUpdate.Log
             LogLock.ExitWriteLock();
             DrawNewLogs();
         }
+        public static void AllowDraw(object sender = null, EventArgs e = null)
+        {
+            CanDrawNewLogs = true;
+            if (DrawQueued) DrawNewLogs();
+        }
         private static void ClearAllLogs()
         {
             ListView lv = Program.MainForm.lvDetails;
@@ -110,13 +117,7 @@ namespace SuperUpdate.Log
             lv.Columns.Add("Time");
             lv.Columns.Add("Description");
             lv.Items.Clear();
-        }
-        private static void RefreshTimer_Tick(object sender, EventArgs e)
-        {
-            CanDrawNewLogs = true;
-            if (DrawQueued) DrawNewLogs();
-        }
-        private static Delegate DrawLogs = new Action(() => {
+        }        private static Delegate DrawLogs = new Action(() => {
             LogLock.EnterReadLock();
             LogItem LastInfo = LogItems.FindLast(new Predicate<LogItem>((x) => {
                 if (x.Level == LogLevels.Information) return true;
