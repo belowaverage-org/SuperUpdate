@@ -26,7 +26,7 @@ namespace SuperUpdate
             InitializeComponent();
             Expanded = false;
             Size = MinimumSize;
-            Icon = Properties.Resources.supersuite;
+            Icon = Properties.Resources.logo;
         }
         private bool Running
         {
@@ -234,7 +234,7 @@ namespace SuperUpdate
                 MemoryStream stream = new MemoryStream();
                 Bitmap btm = new Bitmap(64, 64);
                 Graphics g = Graphics.FromImage(btm);
-                g.DrawIcon(new Icon(Properties.Resources.supersuite, 48, 48), 8, 8);
+                g.DrawIcon(new Icon(Properties.Resources.logo, 48, 48), 8, 8);
                 btm.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
                 g.Dispose();
                 string img = Convert.ToBase64String(stream.GetBuffer());

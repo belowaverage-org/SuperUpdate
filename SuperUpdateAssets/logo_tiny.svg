@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="4.122551"
+   inkscape:export-xdpi="4.122551"
+   inkscape:export-filename="C:\Users\dylan\Source\Repos\SuperUpdate\SuperUpdateAssets\16.png"
+   width="500"
+   height="500"
+   viewBox="0 0 132.29167 132.29167"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="logo_tiny.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient864">
+      <stop
+         style="stop-color:#d400dc;stop-opacity:1"
+         offset="0"
+         id="stop860" />
+      <stop
+         style="stop-color:#0096cc;stop-opacity:1"
+         offset="1"
+         id="stop862" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient864"
+       id="linearGradient866"
+       x1="39.309525"
+       y1="40.254463"
+       x2="92.415176"
+       y2="95.061012"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:lockguides="false"
+     showguides="false"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="194.14862"
+     inkscape:cy="220.30981"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer2"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="px"
+     width="49px"
+     inkscape:pagecheckerboard="true"
+     inkscape:snap-grids="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Base Icon"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <path
+       sodipodi:insensitive="true"
+       sodipodi:nodetypes="cccccccccccc"
+       d="M 109.875,13.464844 C 104.04012,19.473702 98.204362,25.481708 92.369141,31.490234 80.559026,22.555167 64.116187,20.29314 50.287467,25.540545 36.724862,30.558298 25.930776,42.580424 22.667969,56.701172 c -3.086001,13.190912 0.206039,27.784683 8.950022,38.179557 8.102927,9.859821 20.589192,15.992391 33.365867,16.213911 12.987211,0.33383 26.142024,-5.14946 34.636339,-15.060535 7.143173,-8.235639 11.223533,-19.118678 11.097733,-30.031565 -0.0969,-1.269303 -0.0689,-2.541999 0.073,-3.80254 -0.003,-16.556901 -0.006,-33.113802 -0.008,-49.670703 -0.30273,0.311849 -0.60547,0.623698 -0.9082,0.935547 z"
+       inkscape:label="Outline"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:4.2543"
+       id="path31" />
+    <path
+       sodipodi:insensitive="true"
+       inkscape:export-ydpi="5.3099999"
+       inkscape:export-xdpi="5.3099999"
+       inkscape:export-filename="C:\Users\dylan\Desktop\16.png"
+       id="path20"
+       d="M 104.43196,58.476645 H 75.5878 L 87.244578,46.479518 C 75.630345,34.992907 56.826327,34.567482 45.212095,46.054061 c -11.614249,11.529158 -11.614249,30.120448 0,41.692154 11.614232,11.486597 30.41825,11.486597 42.032483,0 5.785859,-5.743316 8.678776,-12.422572 8.678776,-20.846087 h 8.508606 c 0,8.423515 -3.74378,19.357078 -11.231356,26.759564 -14.932603,14.804968 -39.182115,14.804968 -54.114702,0 -14.890057,-14.762437 -15.017677,-38.756691 -0.08522,-53.519111 14.932602,-14.76242 38.884311,-14.76242 53.816898,0 L 104.43184,28.186 V 58.476613 M 68.27028,49.457507 V 67.538282 L 83.160321,76.387221 80.097224,81.534928 61.88883,70.728998 V 49.457507 Z"
+       style="display:inline;fill:url(#linearGradient866);fill-opacity:1;stroke-width:4.2543"
+       inkscape:label="Logo" />
+  </g>
+</svg>

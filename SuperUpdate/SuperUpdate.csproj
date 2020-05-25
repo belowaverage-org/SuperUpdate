@@ -38,7 +38,7 @@
     </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\supersuite.ico</ApplicationIcon>
+    <ApplicationIcon>..\SuperUpdateAssets\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -80,7 +80,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\spinner" />
-    <None Include="Resources\supersuite.ico" />
     <None Include="UpdateSchema.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -101,22 +101,22 @@ namespace SuperUpdate.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon logo {
+            get {
+                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] spinner {
             get {
                 object obj = ResourceManager.GetObject("spinner", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon supersuite {
-            get {
-                object obj = ResourceManager.GetObject("supersuite", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         

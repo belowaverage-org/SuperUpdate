@@ -11,14 +11,14 @@ namespace SuperUpdate
         public About()
         {
             InitializeComponent();
-            Icon = Properties.Resources.supersuite;
+            Icon = Properties.Resources.logo;
             Text = String.Format("About {0}", AssemblyTitle);
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             labelCopyright.Text = AssemblyCopyright;
             labelCompanyName.Text = AssemblyCompany;
             textBoxDescription.Text = AssemblyDescription;
-            pbLogo.Image = new Icon(Properties.Resources.supersuite, 48, 48).ToBitmap();
+            pbLogo.Image = new Icon(Properties.Resources.logo, 48, 48).ToBitmap();
         }
         #region Assembly Attribute Accessors
 
