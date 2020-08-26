@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Text;
 using System.Xml;
+using System.Diagnostics;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace SuperUpdate
 {
@@ -107,16 +110,28 @@ namespace SuperUpdate
         {
             bool success = true;
             string xmlUrl = "";
-            string[] encodedXML = Assembly.GetExecutingAssembly().ManifestModule.Name.Split('_');
+            FileStream fs = File.OpenRead(Process.GetCurrentProcess().MainModule.FileName);
+            StreamReader sr = new StreamReader(fs);
+            fs.Seek(-2048, SeekOrigin.End);
+            List<string> srLines = new List<string>();
+            while (!sr.EndOfStream) srLines.Add(await sr.ReadLineAsync());
+            if (
+                srLines.Count >= 2 &&
+                srLines[srLines.Count - 2] == "" &&
+                srLines[srLines.Count - 1] != "" &&
+                Uri.TryCreate(srLines[srLines.Count - 1], UriKind.RelativeOrAbsolute, out Uri uri)
+            )
+            {
+                xmlUrl = uri.ToString();
+            }
             if (Program.Arguments.Length == 1)
             {
                 Logger.Log("XML passed via CLI.");
                 xmlUrl = Program.Arguments[0];
             }
-            else if (encodedXML.Length == 2)
+            if (xmlUrl != "")
             {
-                Logger.Log("XML passed via module name.");
-                xmlUrl = Encoding.UTF8.GetString(Convert.FromBase64String(encodedXML[1].Replace(".exe", "")));
+                Logger.Log("XML passed via binary.");
             }
             else
             {
