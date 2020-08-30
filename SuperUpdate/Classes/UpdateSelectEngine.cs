@@ -23,28 +23,24 @@ namespace SuperUpdate.Update
             ListView.Items.Clear();
             ListView.Columns.Add("Version");
             ListView.Columns.Add("Release Date");
+            ListView.Columns.Add("Release Notes");
             ListView.DoubleClick += ListView_DoubleClick;
-
             foreach (string channel in UpdateEngine.AvailableChannels)
             {
                 ListView.Groups.Add(new ListViewGroup(channel, channel));
             }
-
             foreach (XmlNode update in XmlEngine.UpdateXML.SelectNodes("/SuperUpdate/Updates/Update"))
             {
                 XmlAttributeCollection updateAttribs = update.Attributes;
                 if (update.Attributes["ScriptURL"] == null) continue;
                 ListViewItem lvItem = ListView.Items.Add(updateAttribs["Version"].Value);
+                if (update == UpdateEngine.LatestVersion) lvItem.Selected = true;
                 lvItem.Tag = updateAttribs;
                 lvItem.Group = ListView.Groups[update.Attributes["Channel"].Value];
-                if (updateAttribs["DateTime"] != null)
-                {
-                    lvItem.SubItems.Add(DateTime.Parse(updateAttribs["DateTime"].Value).ToString());
-                }
-                else
-                {
-                    lvItem.SubItems.Add("");
-                }
+                if (updateAttribs["DateTime"] != null) lvItem.SubItems.Add(DateTime.Parse(updateAttribs["DateTime"].Value).ToString());
+                else lvItem.SubItems.Add("");
+                if (updateAttribs["ReleaseInfoURL"] != null) lvItem.SubItems.Add(updateAttribs["ReleaseInfoURL"].Value);
+                else lvItem.SubItems.Add("");
             }
             ListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             ListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);

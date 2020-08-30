@@ -43,7 +43,7 @@ namespace SuperUpdate
                     pbMain.Style = ProgressBarStyle.Continuous;
                 }
                 RefreshLargeIcon();
-                //btnAction.Enabled = !value;
+                btnAction.Enabled = !value;
             }
         }
         private bool Expanded
