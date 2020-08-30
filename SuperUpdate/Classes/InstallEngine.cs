@@ -21,7 +21,7 @@ namespace SuperUpdate.Install
             PS.Streams.Verbose.DataAdded += PS_DataAdded;
             PS.Streams.Information.DataAdded += PS_DataAdded;
             PS.Streams.Progress.DataAdded += PS_DataAdded;
-            PS.
+            //PS.
         }
 
         private void PS_DataAdded(object sender, DataAddedEventArgs e)
