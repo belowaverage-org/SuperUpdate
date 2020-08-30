@@ -35,7 +35,7 @@ namespace SuperUpdate.Update
                 if (update.Attributes["ScriptURL"] == null) continue;
                 ListViewItem lvItem = ListView.Items.Add(updateAttribs["Version"].Value);
                 if (update == UpdateEngine.LatestVersion) lvItem.Selected = true;
-                lvItem.Tag = updateAttribs;
+                lvItem.Tag = update;
                 lvItem.Group = ListView.Groups[update.Attributes["Channel"].Value];
                 if (updateAttribs["DateTime"] != null) lvItem.SubItems.Add(DateTime.Parse(updateAttribs["DateTime"].Value).ToString());
                 else lvItem.SubItems.Add("");
@@ -59,7 +59,7 @@ namespace SuperUpdate.Update
         private void ListView_DoubleClick(object sender, EventArgs e)
         {
             ListViewItem lvItem = ListView.SelectedItems[0];
-            XmlAttribute releaseInfo = ((XmlAttributeCollection)lvItem.Tag)["ReleaseInfoURL"];
+            XmlAttribute releaseInfo = ((XmlNode)lvItem.Tag).Attributes["ReleaseInfoURL"];
             if (releaseInfo == null) return;
             Process.Start(releaseInfo.Value);
         }

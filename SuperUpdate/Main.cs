@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Diagnostics;
 using System.Collections.Generic;
+using SuperUpdate.Install;
 
 namespace SuperUpdate
 {
@@ -21,6 +22,7 @@ namespace SuperUpdate
         private bool IsRunning = false;
         private bool IsExpanded = false;
         private bool IsMouseOverArrow = false;
+        private UpdateSelectEngine UpdateSelectUI = null;
         public Main()
         {
             InitializeComponent();
@@ -99,8 +101,7 @@ namespace SuperUpdate
                 Running = false;
                 return;
             }
-            UpdateSelectEngine upEng = new UpdateSelectEngine(lvDetails);
-            //upEng.Dispose();
+            UpdateSelectUI = new UpdateSelectEngine(lvDetails);
             Running = false;
         }
         private async Task<bool> CheckForUpdates()
@@ -191,13 +192,16 @@ namespace SuperUpdate
         }
         private async void btnAction_Click(object sender, EventArgs e)
         {
-            
+            Running = true;
+            InstallEngine IE = new InstallEngine();
+            Task install = IE.InstallUpdate((XmlNode)lvDetails.SelectedItems[0].Tag);
+            if (UpdateSelectUI != null)
+            {
+                UpdateSelectUI.Dispose();
+                UpdateSelectUI = null;
+            }
+            await install;
         }
-
-        /*
-         * Running = true;
-            await CheckForUpdates();
-            Running = false;*/
         private void ExpandContract(object sender = null, EventArgs e = null)
         {
             if (Expanded)
@@ -260,7 +264,11 @@ namespace SuperUpdate
         {
             CenterToScreen();
         }
-        //public void 
+        private void lvDetails_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvDetails.SelectedItems.Count == 1 && !Running) btnAction.Enabled = true;
+            else btnAction.Enabled = false;
+        }
     }
 }
  

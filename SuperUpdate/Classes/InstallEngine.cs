@@ -12,11 +12,27 @@ namespace SuperUpdate.Install
 {
     class InstallEngine
     {
-        private static PowerShell PS = PowerShell.Create();
-        public static Task<bool> InstallUpdate(XmlNode UpdateNode)
+        private PowerShell PS = PowerShell.Create();
+        public InstallEngine()
+        {
+            PS.Streams.Debug.DataAdded += PS_DataAdded;
+            PS.Streams.Error.DataAdded += PS_DataAdded;
+            PS.Streams.Warning.DataAdded += PS_DataAdded;
+            PS.Streams.Verbose.DataAdded += PS_DataAdded;
+            PS.Streams.Information.DataAdded += PS_DataAdded;
+            PS.Streams.Progress.DataAdded += PS_DataAdded;
+            PS.
+        }
+
+        private void PS_DataAdded(object sender, DataAddedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> InstallUpdate(XmlNode UpdateNode)
         {
             return Task.Run(() => {
-                Logger.Log("YEE");
+                //PS.
                 return true;
             });
         }
