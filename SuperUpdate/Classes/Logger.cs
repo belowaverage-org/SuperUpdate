@@ -72,10 +72,11 @@ namespace SuperUpdate.Log
                 LogLock.EnterReadLock();
                 foreach (LogItem logItem in LogItems)
                 {
+                    string msg = logItem.Message.Replace("\n", ": ");
                     writer.WriteLine(
                         logItem.Level.ToString() + " : " +
                         logItem.TimeStamp.ToString() + " > " +
-                        logItem.Message
+                        msg
                     );
                 }
                 LogLock.ExitReadLock();
@@ -117,7 +118,8 @@ namespace SuperUpdate.Log
             lv.Columns.Add("Time");
             lv.Columns.Add("Description");
             lv.Items.Clear();
-        }        private static Delegate DrawLogs = new Action(() => {
+        }        
+        private static Delegate DrawLogs = new Action(() => {
             LogLock.EnterReadLock();
             LogItem LastInfo = LogItems.FindLast(new Predicate<LogItem>((x) => {
                 if (x.Level == LogLevels.Information) return true;
@@ -143,7 +145,8 @@ namespace SuperUpdate.Log
                 if (logItem.Level == LogLevels.Warning) item.ImageKey = "warn";
                 if (logItem.Level == LogLevels.Exception) item.ImageKey = "error";
                 item.SubItems.Add(logItem.TimeStamp.ToLongTimeString());
-                item.SubItems.Add(logItem.Message);
+                string msg = logItem.Message.Replace("\n", ": ");
+                item.SubItems.Add(msg);
                 logItem.Drawn = true;
                 newListItems.Add(item);
             }

@@ -43,12 +43,13 @@ namespace SuperUpdate
                 else
                 {
                     pbMain.Style = ProgressBarStyle.Continuous;
+                    pbMain.Value = 0;
                 }
                 RefreshLargeIcon();
                 btnAction.Enabled = !value;
             }
         }
-        private bool Expanded
+        public bool Expanded
         {
             get { return IsExpanded; }
             set
@@ -201,8 +202,10 @@ namespace SuperUpdate
                 UpdateSelectUI = null;
             }
             await install;
+            Running = false;
+            btnAction.Enabled = false;
         }
-        private void ExpandContract(object sender = null, EventArgs e = null)
+        public void ExpandContract(object sender = null, EventArgs e = null)
         {
             if (Expanded)
             {

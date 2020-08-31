@@ -229,7 +229,7 @@
         private System.Windows.Forms.ContextMenu miLog;
         private System.Windows.Forms.MenuItem miSaveLog;
         private System.Windows.Forms.SaveFileDialog diSaveLog;
-        private System.Windows.Forms.ProgressBar pbMain;
+        public System.Windows.Forms.ProgressBar pbMain;
     }
 }
 
