@@ -50,7 +50,6 @@ namespace SuperUpdate
                     pbMain.Value = 0;
                 }
                 RefreshLargeIcon();
-                btnAction.Enabled = !value;
             }
         }
         public bool Expanded
@@ -109,6 +108,7 @@ namespace SuperUpdate
             }
             Program.UpdateSelectEngine = new UpdateSelectEngine(lvDetails);
             Running = false;
+            lvDetails_SelectedIndexChanged(null, null);
         }
         private async Task<bool> CheckForUpdates()
         {
@@ -132,8 +132,8 @@ namespace SuperUpdate
             {
                 Logger.Log("XML passed via CLI.");
                 xmlUrl = Program.Arguments[0];
-            }
-            if (xmlUrl != "")
+            } 
+            else if (xmlUrl != "")
             {
                 Logger.Log("XML passed via binary.");
             }
