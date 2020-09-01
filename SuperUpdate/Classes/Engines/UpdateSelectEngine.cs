@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System.Xml;
 using SuperUpdate.Log;
-using SuperUpdate.Engines;
 using System.Diagnostics;
 
 namespace SuperUpdate.Engines

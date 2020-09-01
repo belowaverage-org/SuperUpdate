@@ -126,6 +126,11 @@ namespace SuperUpdate.Engines
                     Misc.IsElevated = bool.Parse(setting.Attributes["Value"].Value);
                     continue;
                 }
+                if (setting.Name == "AutoRun")
+                {
+                    Program.MainForm.AutoRun = bool.Parse(setting.Attributes["Value"].Value);
+                    continue;
+                }
             }
         });
     }

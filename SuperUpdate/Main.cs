@@ -20,6 +20,13 @@ namespace SuperUpdate
         private bool IsRunning = false;
         private bool IsExpanded = false;
         private bool IsMouseOverArrow = false;
+        public bool AutoRun
+        {
+            set
+            {
+                if (value) btnAction_Click(null, null);
+            }
+        }
         public Main()
         {
             InitializeComponent();

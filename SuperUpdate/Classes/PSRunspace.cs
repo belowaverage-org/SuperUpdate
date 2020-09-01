@@ -73,6 +73,17 @@ namespace SuperUpdate.Classes
                 InstallEngine.CloseWindowWhenDone = value;
             }
         }
+        public bool RelaunchWhenDone
+        {
+            get
+            {
+                return InstallEngine.CloseWindowWhenDone;
+            }
+            set
+            {
+                InstallEngine.CloseWindowWhenDone = value;
+            }
+        }
         public bool Elevated
         {
             get
@@ -82,6 +93,17 @@ namespace SuperUpdate.Classes
             set
             {
                 Misc.IsElevated = value;
+            }
+        }
+        public string[] Arguments
+        {
+            get
+            {
+                return Program.Arguments;
+            }
+            set
+            {
+                Program.Arguments = value;
             }
         }
         public XmlNode CurrentVersion
@@ -105,12 +127,9 @@ namespace SuperUpdate.Classes
                 return Logger.LogItems;
             }
         }
-        public string[] Arguments
+        public void ReLaunch()
         {
-            get
-            {
-                return Program.Arguments;
-            }
+            Misc.ReLaunch();
         }
     }
 }

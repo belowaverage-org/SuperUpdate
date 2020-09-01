@@ -16,29 +16,33 @@ namespace SuperUpdate.Classes
             {
                 if (value && !IsElevated)
                 {
-                    string args = "";
-                    foreach (string arg in Program.Arguments)
-                    {
-                        args += arg + " ";
-                    }
-                    Process proc = new Process();
-                    proc.StartInfo = new ProcessStartInfo()
-                    {
-                        FileName = Application.ExecutablePath,
-                        Arguments = args,
-                        Verb = "RunAs",
-                        UseShellExecute = true
-                    };
-                    try 
-                    { 
-                        proc.Start();
-                        Process.GetCurrentProcess().Kill();
-                    }
-                    catch (Exception)
-                    {
-                        Process.GetCurrentProcess().Kill();
-                    }
+                    ReLaunch("RunAs");
                 }
+            }
+        }
+        public static void ReLaunch(string verb = "")
+        {
+            string args = "";
+            foreach (string arg in Program.Arguments)
+            {
+                args += arg + " ";
+            }
+            Process proc = new Process();
+            proc.StartInfo = new ProcessStartInfo()
+            {
+                FileName = Application.ExecutablePath,
+                Arguments = args,
+                Verb = verb,
+                UseShellExecute = true
+            };
+            try
+            {
+                proc.Start();
+                Process.GetCurrentProcess().Kill();
+            }
+            catch (Exception)
+            {
+                Process.GetCurrentProcess().Kill();
             }
         }
     }
