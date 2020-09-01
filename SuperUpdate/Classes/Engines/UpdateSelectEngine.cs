@@ -2,12 +2,12 @@
 using System.Windows.Forms;
 using System.Xml;
 using SuperUpdate.Log;
-using SuperUpdate.Xml;
+using SuperUpdate.Engines;
 using System.Diagnostics;
 
-namespace SuperUpdate.Update
+namespace SuperUpdate.Engines
 {
-    class UpdateSelectEngine
+    public class UpdateSelectEngine
     {
         private ListView ListView = null;
         public UpdateSelectEngine(ListView ListView)

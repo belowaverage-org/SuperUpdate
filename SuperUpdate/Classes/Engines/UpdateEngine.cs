@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SuperUpdate.Log;
-using SuperUpdate.Xml;
 using System.Xml;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace SuperUpdate.Update
+namespace SuperUpdate.Engines
 {
-    class UpdateEngine
+    public class UpdateEngine
     {
         public static XmlNode CurrentVersion = null;
         public static XmlNode LatestVersion = null;

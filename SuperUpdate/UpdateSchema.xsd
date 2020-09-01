@@ -48,6 +48,11 @@
                   <xs:attribute name="Text" type="xs:string" use="required" />
                 </xs:complexType>
               </xs:element>
+			  <xs:element name="RequireElevation" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+				  <xs:attribute name="Value" type="xs:boolean" use="required" />
+				</xs:complexType>
+			  </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

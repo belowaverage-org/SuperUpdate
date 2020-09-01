@@ -207,6 +207,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update - Super Suite";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.Main_HelpButtonClicked);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.Resize += new System.EventHandler(this.CheckIfExpanded);
@@ -219,7 +220,7 @@
         #endregion
 
         public System.Windows.Forms.Label lblMessage;
-        private System.Windows.Forms.Button btnAction;
+        public System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.WebBrowser wbAnimation;
         private System.Windows.Forms.Panel pnlGray;

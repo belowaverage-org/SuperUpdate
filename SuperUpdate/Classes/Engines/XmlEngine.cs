@@ -3,13 +3,14 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
 using SuperUpdate.Log;
+using SuperUpdate.Classes;
 using System.IO;
 using System.Drawing;
 using System.Net.Http;
 
-namespace SuperUpdate.Xml
+namespace SuperUpdate.Engines
 {
-    class XmlEngine
+    public class XmlEngine
     {
         public static int MaxRedirects = 10;
         public static XmlDocument UpdateXML = null;
@@ -118,6 +119,11 @@ namespace SuperUpdate.Xml
                 {
                     main.LargeImageSpinner = setting.Attributes["URL"].Value;
                     main.RefreshLargeIcon();
+                    continue;
+                }
+                if (setting.Name == "RequireElevation")
+                {
+                    Misc.IsElevated = bool.Parse(setting.Attributes["Value"].Value);
                     continue;
                 }
             }

@@ -54,12 +54,13 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\InstallEngine.cs" />
+    <Compile Include="Classes\Engines\InstallEngine.cs" />
     <Compile Include="Classes\Logger.cs" />
-    <Compile Include="Classes\PSRunspaceEngine.cs" />
-    <Compile Include="Classes\UpdateEngine.cs" />
-    <Compile Include="Classes\UpdateSelectEngine.cs" />
-    <Compile Include="Classes\XmlEngine.cs" />
+    <Compile Include="Classes\Misc.cs" />
+    <Compile Include="Classes\PSRunspace.cs" />
+    <Compile Include="Classes\Engines\UpdateEngine.cs" />
+    <Compile Include="Classes\Engines\UpdateSelectEngine.cs" />
+    <Compile Include="Classes\Engines\XmlEngine.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

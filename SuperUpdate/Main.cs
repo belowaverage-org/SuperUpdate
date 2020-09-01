@@ -2,15 +2,13 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using SuperUpdate.Log;
-using SuperUpdate.Xml;
-using SuperUpdate.Update;
+using SuperUpdate.Engines;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Diagnostics;
 using System.Collections.Generic;
-using SuperUpdate.Install;
 
 namespace SuperUpdate
 {
@@ -22,7 +20,6 @@ namespace SuperUpdate
         private bool IsRunning = false;
         private bool IsExpanded = false;
         private bool IsMouseOverArrow = false;
-        private UpdateSelectEngine UpdateSelectUI = null;
         public Main()
         {
             InitializeComponent();
@@ -88,6 +85,7 @@ namespace SuperUpdate
         }
         private async void Main_Load(object sender = null, EventArgs e = null)
         {
+            Activate();
             bool success = true;
             Running = true;
             await GetImagesFromResources();
@@ -102,7 +100,7 @@ namespace SuperUpdate
                 Running = false;
                 return;
             }
-            UpdateSelectUI = new UpdateSelectEngine(lvDetails);
+            Program.UpdateSelectEngine = new UpdateSelectEngine(lvDetails);
             Running = false;
         }
         private async Task<bool> CheckForUpdates()
@@ -194,16 +192,17 @@ namespace SuperUpdate
         private async void btnAction_Click(object sender, EventArgs e)
         {
             Running = true;
-            InstallEngine IE = new InstallEngine();
-            Task install = IE.InstallUpdate((XmlNode)lvDetails.SelectedItems[0].Tag);
-            if (UpdateSelectUI != null)
+            Program.InstallEngine = new InstallEngine();
+            Task install = Program.InstallEngine.InstallUpdate((XmlNode)lvDetails.SelectedItems[0].Tag);
+            if (Program.UpdateSelectEngine != null)
             {
-                UpdateSelectUI.Dispose();
-                UpdateSelectUI = null;
+                Program.UpdateSelectEngine.Dispose();
+                Program.UpdateSelectEngine = null;
             }
             await install;
             Running = false;
             btnAction.Enabled = false;
+            btnCancel.Text = "Close";
         }
         public void ExpandContract(object sender = null, EventArgs e = null)
         {
@@ -269,9 +268,20 @@ namespace SuperUpdate
         }
         private void lvDetails_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvDetails.SelectedItems.Count == 1 && !Running) btnAction.Enabled = true;
+            if (
+                Program.UpdateSelectEngine != null &&
+                lvDetails.SelectedItems.Count == 1 &&
+                !Running
+            ) btnAction.Enabled = true;
             else btnAction.Enabled = false;
+        }
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Program.InstallEngine != null) Program.InstallEngine.Stop();
+            if (Running)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
- 

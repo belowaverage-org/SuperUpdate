@@ -8,10 +8,11 @@ using System.Net.Http;
 using System.Windows.Forms;
 using System.Management.Automation.Runspaces;
 
-namespace SuperUpdate.Install
+namespace SuperUpdate.Engines
 {
-    class InstallEngine
+    public class InstallEngine
     {
+        public static bool CloseWindowWhenDone = false;
         private PowerShell PS = PowerShell.Create();
         private Runspace RS = RunspaceFactory.CreateRunspace();
         private HttpClient HC = new HttpClient();
@@ -26,17 +27,28 @@ namespace SuperUpdate.Install
             PS.Streams.Verbose.DataAdded += Verbose_DataAdded;
             PS.Streams.Information.DataAdded += Information_DataAdded;
             PS.Streams.Progress.DataAdded += Progress_DataAdded;
-            RS.SessionStateProxy.SetVariable("SuperUpdate", new PSRunspace.PSRunspaceEngine());
+            RS.SessionStateProxy.SetVariable("SuperUpdate", new Classes.PSRunspace());
+        }
+        public void Stop()
+        {
+            PS.Stop();
+            Logger.Log("Installation canceled.", LogLevels.Information);
         }
         public Task<bool> InstallUpdate(XmlNode UpdateNode)
         {
             Logger.Log("Downloading installation script...");
             return Task.Run(async () => {
-                HttpResponseMessage msg = await HC.GetAsync(UpdateNode.Attributes["ScriptURL"].Value); // This may be null sometimes!
+                HttpResponseMessage msg = await HC.GetAsync(UpdateNode.Attributes["ScriptURL"].Value);
                 string script = await msg.Content.ReadAsStringAsync();
                 PS.AddScript(script);
                 PS.Invoke();
                 Logger.Log("Done!");
+                if (CloseWindowWhenDone)
+                {
+                    Program.MainForm.Invoke(new Action(() => {
+                        Program.MainForm.Close();
+                    }));
+                }
                 return true;
             });
         }

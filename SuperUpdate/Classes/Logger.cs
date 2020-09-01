@@ -7,8 +7,9 @@ using System.Threading;
 
 namespace SuperUpdate.Log
 {
-    class Logger
+    public class Logger
     {
+        public static List<LogItem> LogItems = new List<LogItem>();
         public static int MaxLogsToDraw = 100;
         public static bool DrawEnabled = true;
         public static void Log(string Message, LogLevels LogLevel = LogLevels.Verbose)
@@ -166,10 +167,9 @@ namespace SuperUpdate.Log
         private static bool DrawQueued = true;
         private static ReaderWriterLockSlim LogLock = new ReaderWriterLockSlim();
         private static System.Windows.Forms.Timer RefreshTimer = new System.Windows.Forms.Timer();
-        private static List<LogItem> LogItems = new List<LogItem>();
         private static ImageList ImageList = new ImageList();
     }
-    class LogItem
+    public class LogItem
     {
         public bool Drawn = false;
         public DateTime TimeStamp = DateTime.Now;

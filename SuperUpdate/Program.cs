@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SuperUpdate.Engines;
 using SuperUpdate.Log;
 
 namespace SuperUpdate
@@ -26,5 +27,9 @@ namespace SuperUpdate
         }
         public static Main MainForm = null;
         public static string[] Arguments;
+        public static InstallEngine InstallEngine = null;
+        public static UpdateEngine UpdateEngine = null;
+        public static UpdateSelectEngine UpdateSelectEngine = null;
+        public static XmlEngine XmlEngine = null;
     }
 }

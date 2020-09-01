@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Xml;
+using SuperUpdate.Engines;
+using SuperUpdate.Log;
 
-namespace SuperUpdate.PSRunspace
+namespace SuperUpdate.Classes
 {
-    public class PSRunspaceEngine // THIS CLASS NEEDS ACCESS TO THE UPDATE ENGINE CLASS
+    public class PSRunspace
     {
         public bool WindowVisible
         {
@@ -31,7 +35,7 @@ namespace SuperUpdate.PSRunspace
                 }));
             }
         }
-        public string Text
+        public string WindowText
         {
             get
             {
@@ -44,7 +48,7 @@ namespace SuperUpdate.PSRunspace
                 }));
             }
         }
-        public bool Expanded
+        public bool WindowExpanded
         {
             get
             {
@@ -58,11 +62,55 @@ namespace SuperUpdate.PSRunspace
                 }));
             }
         }
-        public void Close()
+        public bool CloseWindowWhenDone
         {
-            Program.MainForm.Invoke(new Action(() => {
-                Program.MainForm.Close();
-            }));
+            get
+            {
+                return InstallEngine.CloseWindowWhenDone;
+            }
+            set
+            {
+                InstallEngine.CloseWindowWhenDone = value;
+            }
+        }
+        public bool Elevated
+        {
+            get
+            {
+                return Misc.IsElevated;
+            }
+            set
+            {
+                Misc.IsElevated = value;
+            }
+        }
+        public XmlNode CurrentVersion
+        {
+            get
+            {
+                return UpdateEngine.CurrentVersion;
+            }
+        }
+        public XmlNode LatestVersion
+        {
+            get
+            {
+                return UpdateEngine.LatestVersion;
+            }
+        }
+        public List<LogItem> LogItems
+        {
+            get
+            {
+                return Logger.LogItems;
+            }
+        }
+        public string[] Arguments
+        {
+            get
+            {
+                return Program.Arguments;
+            }
         }
     }
 }
