@@ -6,9 +6,12 @@
     <WindowIcon URL="https://asdf.com/icon.ico" />
     <WindowIconLarge URL="https://asdf.com/icon.ico" />
     <WindowIconLargeAnimated URL="https://asdf.com/icon.gif" />
+	<MessageNoUpdate Text="You are already up to date!"/>
+	<RequireElevation Value="false" />
+	<AutoRun Value="false" />
   </Settings>
   <Updates>
-    <Update Version="1.1.1.1" DateTime="2000-01-01T00:00:00" Channel="Release" ReleaseInfoURL="https://github.com/belowaverage-org/SuperUpdate/releases/tag/1.1.1.1" ScriptURL="https://static.belowaverage.org/software/SuperUpdate/SuperUpdate/1.1.1.1/Update.ps1">
+    <Update Version="1.1.1.1" DateTime="2000-01-01T00:00:00" Channel="Release" ReleaseInfoURL="https://github.com/belowaverage-org/SuperUpdate/releases/tag/1.1.1.1" ScriptURL="https://static.belowaverage.org/software/SuperUpdate/SuperUpdate/1.1.1.1/Update.ps1" UpdateMessage="2019 Update Available!">
       <File SHA1="0DDD90457B7FC4F3A429665F1271E31E515E6A75" Path=".\TestPayload.txt" />
     </Update>
   </Updates>
