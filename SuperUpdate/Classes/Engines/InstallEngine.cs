@@ -7,12 +7,15 @@ using SuperUpdate.Log;
 using System.Net.Http;
 using System.Windows.Forms;
 using System.Management.Automation.Runspaces;
+using System.Diagnostics;
+using SuperUpdate.Classes;
 
 namespace SuperUpdate.Engines
 {
     public class InstallEngine
     {
         public static bool CloseWindowWhenDone = false;
+        public static bool RelaunchWhenDone = false;
         private PowerShell PS = PowerShell.Create();
         private Runspace RS = RunspaceFactory.CreateRunspace();
         private HttpClient HC = new HttpClient();
@@ -43,12 +46,8 @@ namespace SuperUpdate.Engines
                 PS.AddScript(script);
                 PS.Invoke();
                 Logger.Log("Done!");
-                if (CloseWindowWhenDone)
-                {
-                    Program.MainForm.Invoke(new Action(() => {
-                        Program.MainForm.Close();
-                    }));
-                }
+                if (RelaunchWhenDone) Misc.ReLaunch();
+                if (CloseWindowWhenDone || RelaunchWhenDone) Process.GetCurrentProcess().Kill();
                 return true;
             });
         }

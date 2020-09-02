@@ -39,6 +39,11 @@ namespace SuperUpdate.Engines
                     break;
                 }
             }
+            if (CurrentVersion == null)
+            {
+                Logger.Log("Could not detect the current version!", LogLevels.Warning);
+                return false;
+            }
             Logger.Log("Detecting latest version...", LogLevels.Information);
             foreach (XmlNode update in updates)
             {

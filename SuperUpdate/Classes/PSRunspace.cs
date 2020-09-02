@@ -77,11 +77,11 @@ namespace SuperUpdate.Classes
         {
             get
             {
-                return InstallEngine.CloseWindowWhenDone;
+                return InstallEngine.RelaunchWhenDone;
             }
             set
             {
-                InstallEngine.CloseWindowWhenDone = value;
+                InstallEngine.RelaunchWhenDone = value;
             }
         }
         public bool Elevated
