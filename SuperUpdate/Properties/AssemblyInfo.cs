@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Super Update - Update Management System")]
-[assembly: AssemblyDescription("Super Update is a customizable & scriptable installation & update tool that makes it easy to enable internet updates for any project!")]
+[assembly: AssemblyDescription("Super Update is a customizable installation / update tool that makes it easy to enable internet updates for any project!")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("Dylan Bickerstaff")]
 [assembly: AssemblyProduct("Super Update")]
