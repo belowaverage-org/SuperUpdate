@@ -200,13 +200,13 @@ namespace SuperUpdate
         {
             Running = true;
             Program.InstallEngine = new InstallEngine();
-            Task install = Program.InstallEngine.InstallUpdate((XmlNode)lvDetails.SelectedItems[0].Tag);
+            Task<bool> install = Program.InstallEngine.InstallUpdate((XmlNode)lvDetails.SelectedItems[0].Tag);
             if (Program.UpdateSelectEngine != null)
             {
                 Program.UpdateSelectEngine.Dispose();
                 Program.UpdateSelectEngine = null;
             }
-            await install;
+            if (!await install) Logger.Log("Something went wrong, press \"More details\" for more details.", LogLevels.Information);
             Running = false;
             btnAction.Enabled = false;
             btnCancel.Text = "Close";

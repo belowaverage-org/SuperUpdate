@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Management.Automation;
 using SuperUpdate.Log;
-using System.Net.Http;
 using System.Windows.Forms;
 using System.Management.Automation.Runspaces;
 using System.Diagnostics;
@@ -18,7 +17,6 @@ namespace SuperUpdate.Engines
         public static bool RelaunchWhenDone = false;
         private PowerShell PS = PowerShell.Create();
         private Runspace RS = RunspaceFactory.CreateRunspace();
-        private HttpClient HC = new HttpClient();
         private ProgressBar ProgressBar = Program.MainForm.pbMain;
         public InstallEngine()
         {
@@ -39,11 +37,15 @@ namespace SuperUpdate.Engines
         }
         public Task<bool> InstallUpdate(XmlNode UpdateNode)
         {
-            Logger.Log("Downloading installation script...");
             return Task.Run(async () => {
-                HttpResponseMessage msg = await HC.GetAsync(UpdateNode.Attributes["ScriptURL"].Value);
-                string script = await msg.Content.ReadAsStringAsync();
+                string script = await Misc.GetFileContentURI(new Uri(UpdateNode.Attributes["ScriptURL"].Value, UriKind.RelativeOrAbsolute));
+                if (script == "")
+                {
+                    Logger.Log("Could not retrieve script, or script is empty.", LogLevels.Warning);
+                    return false;
+                }
                 PS.AddScript(script);
+                Logger.Log("Starting script...");
                 PS.Invoke();
                 Logger.Log("Done!");
                 if (RelaunchWhenDone) Misc.ReLaunch();
