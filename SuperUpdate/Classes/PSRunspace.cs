@@ -122,6 +122,13 @@ namespace SuperUpdate.Classes
                 return UpdateEngine.LatestVersion;
             }
         }
+        public XmlNode SelectedVersion
+        {
+            get
+            {
+                return InstallEngine.SelectedVersion;
+            }
+        }
         public List<LogItem> LogItems
         {
             get

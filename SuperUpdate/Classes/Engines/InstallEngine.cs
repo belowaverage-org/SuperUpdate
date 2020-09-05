@@ -15,6 +15,7 @@ namespace SuperUpdate.Engines
     {
         public static bool CloseWindowWhenDone = false;
         public static bool RelaunchWhenDone = false;
+        public static XmlNode SelectedVersion = null;
         private PowerShell PS = PowerShell.Create();
         private Runspace RS = RunspaceFactory.CreateRunspace();
         private ProgressBar ProgressBar = Program.MainForm.pbMain;
@@ -37,6 +38,7 @@ namespace SuperUpdate.Engines
         }
         public Task<bool> InstallUpdate(XmlNode UpdateNode)
         {
+            SelectedVersion = UpdateNode;
             return Task.Run(async () => {
                 string script = await Misc.GetFileContentURI(new Uri(UpdateNode.Attributes["ScriptURL"].Value, UriKind.RelativeOrAbsolute));
                 if (script == "")
