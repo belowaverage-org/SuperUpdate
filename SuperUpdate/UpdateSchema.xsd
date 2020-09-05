@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-	targetNamespace="http://belowaverage.org/schemas/superupdate/0.0.0.2" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://belowaverage.org/schemas/superupdate/0.0.0.2"
 	xmlns="http://belowaverage.org/schemas/superupdate/0.0.0.2"
 	elementFormDefault="qualified"
 	attributeFormDefault="unqualified"
