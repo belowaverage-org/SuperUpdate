@@ -14,6 +14,7 @@ namespace SuperUpdate.Engines
     {
         public static int MaxRedirects = 10;
         public static XmlDocument UpdateXML = null;
+        public static XmlNamespaceManager XNS = null;
         private static int RedirectCount = 0;
         private static HttpClient HttpClient = new HttpClient();
         public static Task<bool> ReadXML(string URI)
@@ -23,6 +24,8 @@ namespace SuperUpdate.Engines
                 {
                     bool result = true;
                     UpdateXML = new XmlDocument();
+                    XNS = new XmlNamespaceManager(UpdateXML.NameTable);
+                    XNS.AddNamespace("SU", "http://belowaverage.org/schemas/superupdate/0.0.0.2");
                     Logger.Log("Retrieving list of updates...", LogLevels.Information);
                     Logger.Log("Reading XML: " + URI + "...");
                     StringReader schemaReader = new StringReader(Properties.Resources.UpdateSchema);
@@ -31,7 +34,7 @@ namespace SuperUpdate.Engines
                     Logger.Log("Validating Update XML...");
                     UpdateXML.Validate(XmlThrowHere);
                     Logger.Log("Update XML has been read and validated!");
-                    XmlNode redirect = UpdateXML.SelectSingleNode("/SuperUpdate/Settings/Redirect");
+                    XmlNode redirect = UpdateXML.SelectSingleNode("/SU:SuperUpdate/SU:Settings/SU:Redirect", XNS);
                     if (redirect != null)
                     {
                         Logger.Log("XML Redirect Found! Redirecting...");
@@ -80,7 +83,7 @@ namespace SuperUpdate.Engines
         }
         private static Action ParseSettingsUI = new Action(async () => {
             Main main = Program.MainForm;
-            foreach (XmlNode setting in UpdateXML.SelectNodes("/SuperUpdate/Settings/*"))
+            foreach (XmlNode setting in UpdateXML.SelectNodes("/SU:SuperUpdate/SU:Settings/SU:*", XNS))
             {
                 if (setting.Name == "WindowTitle")
                 {

@@ -159,7 +159,7 @@ namespace SuperUpdate
             }
             else
             {
-                XmlNode noUpdateMessage = XmlEngine.UpdateXML.SelectSingleNode("/SuperUpdate/Settings/MessageNoUpdate");
+                XmlNode noUpdateMessage = XmlEngine.UpdateXML.SelectSingleNode("/SU:SuperUpdate/SU:Settings/SU:MessageNoUpdate", XmlEngine.XNS);
                 if (noUpdateMessage != null)
                 {
                     Logger.Log(noUpdateMessage.Attributes["Text"].Value, LogLevels.Information);

@@ -20,7 +20,7 @@ namespace SuperUpdate.Engines
             AvailableChannels.Clear();
             CurrentVersion = LatestVersion = null;
             Logger.Log("Detecting current version...", LogLevels.Information);
-            XmlNodeList updates = XmlEngine.UpdateXML.SelectNodes("/SuperUpdate/Updates/Update");
+            XmlNodeList updates = XmlEngine.UpdateXML.SelectNodes("/SU:SuperUpdate/SU:Updates/SU:Update", XmlEngine.XNS);
             foreach (XmlNode update in updates)
             {
                 bool ThisUpdateMatches = true;

@@ -28,7 +28,7 @@ namespace SuperUpdate.Engines
             {
                 ListView.Groups.Add(new ListViewGroup(channel, channel));
             }
-            foreach (XmlNode update in XmlEngine.UpdateXML.SelectNodes("/SuperUpdate/Updates/Update"))
+            foreach (XmlNode update in XmlEngine.UpdateXML.SelectNodes("/SU:SuperUpdate/SU:Updates/SU:Update", XmlEngine.XNS))
             {
                 XmlAttributeCollection updateAttribs = update.Attributes;
                 if (update.Attributes["ScriptURL"] == null) continue;
