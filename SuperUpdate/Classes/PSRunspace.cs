@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Management.Automation;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using SuperUpdate.Engines;
@@ -125,6 +127,13 @@ namespace SuperUpdate.Classes
             get
             {
                 return Logger.LogItems;
+            }
+        }
+        public Version SuperUpdateVersion
+        {
+            get
+            {
+                return new Version(Application.ProductVersion);
             }
         }
         public void ReLaunch()
