@@ -24,7 +24,7 @@ namespace SuperUpdate.Engines
             foreach (XmlNode update in updates)
             {
                 bool ThisUpdateMatches = true;
-                foreach(XmlNode file in update.SelectNodes("File"))
+                foreach(XmlNode file in update.SelectNodes("SU:File", XmlEngine.XNS))
                 {
                     if(await GetHashOfFile(file.Attributes["Path"].Value) != file.Attributes["SHA1"].Value)
                     {
