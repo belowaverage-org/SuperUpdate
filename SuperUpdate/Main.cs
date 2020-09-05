@@ -198,6 +198,7 @@ namespace SuperUpdate
         }
         private async void btnAction_Click(object sender, EventArgs e)
         {
+            if (lvDetails.SelectedItems.Count == 0) return;
             Running = true;
             Program.InstallEngine = new InstallEngine();
             Task<bool> install = Program.InstallEngine.InstallUpdate((XmlNode)lvDetails.SelectedItems[0].Tag);

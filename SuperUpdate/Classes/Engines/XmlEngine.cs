@@ -12,7 +12,7 @@ namespace SuperUpdate.Engines
 {
     public class XmlEngine
     {
-        public static int MaxRedirects = 10;
+        public static int MaxRedirects = 100;
         public static XmlDocument UpdateXML = null;
         public static XmlNamespaceManager XNS = null;
         private static int RedirectCount = 0;
@@ -34,6 +34,7 @@ namespace SuperUpdate.Engines
                     Logger.Log("Validating Update XML...");
                     UpdateXML.Validate(XmlThrowHere);
                     Logger.Log("Update XML has been read and validated!");
+                    ParseSettings();
                     XmlNode redirect = UpdateXML.SelectSingleNode("/SU:SuperUpdate/SU:Settings/SU:Redirect", XNS);
                     if (redirect != null)
                     {
@@ -46,10 +47,6 @@ namespace SuperUpdate.Engines
                         {
                             result = await ReadXML(redirect.Attributes["RedirectURL"].Value);
                         }
-                    }
-                    else
-                    {
-                        ParseSettings();
                     }
                     RedirectCount = 0;
                     return result;
