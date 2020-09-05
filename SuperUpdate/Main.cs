@@ -17,16 +17,11 @@ namespace SuperUpdate
         public Size ExpandedSize = new Size(800, 500);
         public string LargeImageStatic = "";
         public string LargeImageSpinner = "";
+        public bool AutoRun = false;
         private bool IsRunning = false;
         private bool IsExpanded = false;
         private bool IsMouseOverArrow = false;
-        public bool AutoRun
-        {
-            set
-            {
-                if (value) btnAction_Click(null, null);
-            }
-        }
+        
         public Main()
         {
             InitializeComponent();
@@ -107,8 +102,9 @@ namespace SuperUpdate
                 return;
             }
             Program.UpdateSelectEngine = new UpdateSelectEngine(lvDetails);
-            Running = false;
+            Running = AutoRun;
             lvDetails_SelectedIndexChanged(null, null);
+            if (AutoRun) btnAction_Click(null, null);
         }
         private async Task<bool> CheckForUpdates()
         {
