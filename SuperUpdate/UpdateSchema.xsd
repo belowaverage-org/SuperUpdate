@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://belowaverage.org/schemas/superupdate/0.0.0.2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:element name="SuperUpdate">
 		<xs:complexType>
-			<xs:sequence>
+			<xs:all>
 				<xs:element name="Settings" minOccurs="0" maxOccurs="1">
 					<xs:complexType>
-						<xs:sequence>
+						<xs:all>
 							<xs:element name="Redirect" minOccurs="0" maxOccurs="1">
 								<xs:complexType>
 									<xs:attribute name="RedirectURL" type="xs:anyURI" use="required" />
@@ -58,7 +58,7 @@
 									<xs:attribute name="Value" type="xs:boolean" use="required" />
 								</xs:complexType>
 							</xs:element>
-						</xs:sequence>
+						</xs:all>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="Updates" minOccurs="0" maxOccurs="1">
@@ -86,7 +86,7 @@
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
-			</xs:sequence>
+			</xs:all>
 			<xs:attribute name="UpdaterVersion" type="xs:integer" use="required" />
 		</xs:complexType>
 	</xs:element>
