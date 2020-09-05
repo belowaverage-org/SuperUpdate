@@ -79,6 +79,7 @@
 									<xs:attribute name="DateTime" type="xs:dateTime" use="optional" />
 									<xs:attribute name="ReleaseInfoURL" type="xs:anyURI" use="optional" />
 									<xs:attribute name="ScriptURL" type="xs:anyURI" use="optional" />
+									<xs:attribute name="ScriptArguments" type="xs:string" use="optional" />
 									<xs:attribute name="UpdateMessage" type="xs:string" use="optional" />
 								</xs:complexType>
 							</xs:element>

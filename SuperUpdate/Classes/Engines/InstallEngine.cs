@@ -46,6 +46,7 @@ namespace SuperUpdate.Engines
                     Logger.Log("Could not retrieve script, or script is empty.", LogLevels.Warning);
                     return false;
                 }
+                
                 PS.AddScript(script);
                 Logger.Log("Starting script...");
                 PS.Invoke();

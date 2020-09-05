@@ -97,7 +97,7 @@ namespace SuperUpdate.Classes
                 Misc.IsElevated = value;
             }
         }
-        public string[] Arguments
+        public string[] SuperUpdateArguments
         {
             get
             {
@@ -106,6 +106,17 @@ namespace SuperUpdate.Classes
             set
             {
                 Program.Arguments = value;
+            }
+        }
+        public string[] ScriptArguments
+        {
+            get
+            {
+                if (InstallEngine.SelectedVersion.Attributes["ScriptArguments"] != null)
+                {
+                    return InstallEngine.SelectedVersion.Attributes["ScriptArguments"].Value.Split(' ');
+                }
+                return new string[0];
             }
         }
         public XmlNode CurrentVersion
