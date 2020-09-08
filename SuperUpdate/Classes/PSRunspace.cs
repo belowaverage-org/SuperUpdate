@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Management.Automation;
-using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using SuperUpdate.Engines;
@@ -11,19 +9,9 @@ namespace SuperUpdate.Classes
 {
     public class PSRunspace
     {
-        public bool WindowVisible
-        {
-            get
-            {
-                return Program.MainForm.Visible;
-            }
-            set
-            {
-                Program.MainForm.Invoke(new Action(() => {
-                    Program.MainForm.Visible = value;
-                }));
-            }
-        }
+        /// <summary>
+        /// Get / set the window state of the main window.
+        /// </summary>
         public FormWindowState WindowState
         {
             get
@@ -37,6 +25,9 @@ namespace SuperUpdate.Classes
                 }));
             }
         }
+        /// <summary>
+        /// Get / set the title of the main window.
+        /// </summary>
         public string WindowText
         {
             get
@@ -50,6 +41,25 @@ namespace SuperUpdate.Classes
                 }));
             }
         }
+        /// <summary>
+        /// Gets / sets the visibility status of the main window. Setting this false will hide the main window.
+        /// </summary>
+        public bool WindowVisible
+        {
+            get
+            {
+                return Program.MainForm.Visible;
+            }
+            set
+            {
+                Program.MainForm.Invoke(new Action(() => {
+                    Program.MainForm.Visible = value;
+                }));
+            }
+        }
+        /// <summary>
+        /// Gets / sets the expansion status of the main window. True means that the main window is expanded.
+        /// </summary>
         public bool WindowExpanded
         {
             get
@@ -64,6 +74,9 @@ namespace SuperUpdate.Classes
                 }));
             }
         }
+        /// <summary>
+        /// Get / set this variable to specify whether or not to close SuperUpdate once the PowerShell script finishes.
+        /// </summary>
         public bool CloseWindowWhenDone
         {
             get
@@ -75,6 +88,9 @@ namespace SuperUpdate.Classes
                 InstallEngine.CloseWindowWhenDone = value;
             }
         }
+        /// <summary>
+        /// Get / set this variable to specify whether or not to re-launch SuperUpdate once the PowerShell script finishes.
+        /// </summary>
         public bool RelaunchWhenDone
         {
             get
@@ -86,6 +102,9 @@ namespace SuperUpdate.Classes
                 InstallEngine.RelaunchWhenDone = value;
             }
         }
+        /// <summary>
+        /// Gets / sets the elevation status of SuperUpdate. Setting this true will immediatly elevate the process.
+        /// </summary>
         public bool Elevated
         {
             get
@@ -97,6 +116,9 @@ namespace SuperUpdate.Classes
                 Misc.IsElevated = value;
             }
         }
+        /// <summary>
+        /// Gets / sets the SuperUpdateArguments that were passed to SuperUpdate on launch.
+        /// </summary>
         public string[] SuperUpdateArguments
         {
             get
@@ -108,6 +130,9 @@ namespace SuperUpdate.Classes
                 Program.Arguments = value;
             }
         }
+        /// <summary>
+        /// Gets the arguments passed to the PowerShell script via the update XML node.
+        /// </summary>
         public string[] ScriptArguments
         {
             get
@@ -119,6 +144,9 @@ namespace SuperUpdate.Classes
                 return new string[0];
             }
         }
+        /// <summary>
+        /// Gets the currently detected version of the software to be updated.
+        /// </summary>
         public XmlNode CurrentVersion
         {
             get
@@ -126,6 +154,9 @@ namespace SuperUpdate.Classes
                 return UpdateEngine.CurrentVersion;
             }
         }
+        /// <summary>
+        /// Gets the latest possible version of the software to be updated.
+        /// </summary>
         public XmlNode LatestVersion
         {
             get
@@ -133,6 +164,9 @@ namespace SuperUpdate.Classes
                 return UpdateEngine.LatestVersion;
             }
         }
+        /// <summary>
+        /// Gets the selected update version that the user selected on the updates screen.
+        /// </summary>
         public XmlNode SelectedVersion
         {
             get
@@ -140,6 +174,9 @@ namespace SuperUpdate.Classes
                 return InstallEngine.SelectedVersion;
             }
         }
+        /// <summary>
+        /// Gets a list of log items in current log.
+        /// </summary>
         public List<LogItem> LogItems
         {
             get
@@ -147,6 +184,9 @@ namespace SuperUpdate.Classes
                 return Logger.LogItems;
             }
         }
+        /// <summary>
+        /// Gets the SuperUpdate program version.
+        /// </summary>
         public Version SuperUpdateVersion
         {
             get
@@ -154,6 +194,9 @@ namespace SuperUpdate.Classes
                 return new Version(Application.ProductVersion);
             }
         }
+        /// <summary>
+        /// This method re-launches the program with the SuperUpdateArguments.
+        /// </summary>
         public void ReLaunch()
         {
             Misc.ReLaunch();

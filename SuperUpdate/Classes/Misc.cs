@@ -11,6 +11,9 @@ namespace SuperUpdate.Classes
 {
     public static class Misc
     {
+        /// <summary>
+        /// Get / sets the elevation status of SuperUpdate. True means to immediatly elevate the process if it has not been elevated already.
+        /// </summary>
         public static bool IsElevated { 
             get
             {
@@ -25,6 +28,10 @@ namespace SuperUpdate.Classes
                 }
             }
         }
+        /// <summary>
+        /// This method re-launches SuperUpdate using the Program.Arguments, and optionally with a specified verb.
+        /// </summary>
+        /// <param name="verb">string: The verb to re-launch the program using (usually "RunAs").</param>
         public static void ReLaunch(string verb = "")
         {
             Logger.Log("Relaunching this process...");
@@ -51,6 +58,12 @@ namespace SuperUpdate.Classes
                 Process.GetCurrentProcess().Kill();
             }
         }
+        /// <summary>
+        /// This method returns a string of the contents of a file from a URI object.
+        /// This method supports HTTP, HTTPS, SMB (\\), direct, and absolute paths.
+        /// </summary>
+        /// <param name="URI">Uri: A URI object representing the file to read.</param>
+        /// <returns>string: The contents of the file specified in the URI object.</returns>
         public static async Task<string> GetFileContentURI(Uri URI)
         {
             Logger.Log("Retrieving file: " + URI.ToString() + "...");
