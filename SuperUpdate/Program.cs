@@ -5,6 +5,9 @@ using SuperUpdate.Log;
 
 namespace SuperUpdate
 {
+    /// <summary>
+    /// The main Program class.
+    /// </summary>
     public static class Program
     {
         /// <summary>
@@ -25,11 +28,29 @@ namespace SuperUpdate
         {
             Logger.Log("A FATAL UNCAUGHT ERROR HAS OCCURED", e.Exception);
         }
-        public static Main MainForm = null;
+        /// <summary>
+        /// The arguments passed to Super Update at launch.
+        /// </summary>
         public static string[] Arguments;
+        /// <summary>
+        /// The running instance of the MainForm class.
+        /// </summary>
+        public static Main MainForm = null;
+        /// <summary>
+        /// The running instance of the InstallEngine class.
+        /// </summary>
         public static InstallEngine InstallEngine = null;
+        /// <summary>
+        /// The running instance of the UpdateEngine class.
+        /// </summary>
         public static UpdateEngine UpdateEngine = null;
+        /// <summary>
+        /// The running instance of the UpdateSelectEngine class.
+        /// </summary>
         public static UpdateSelectEngine UpdateSelectEngine = null;
+        /// <summary>
+        /// The running instance of the XmlEngine class.
+        /// </summary>
         public static XmlEngine XmlEngine = null;
     }
 }

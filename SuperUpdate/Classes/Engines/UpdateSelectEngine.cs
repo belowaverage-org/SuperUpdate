@@ -6,9 +6,16 @@ using System.Diagnostics;
 
 namespace SuperUpdate.Engines
 {
+    /// <summary>
+    /// This class is used to display a list of updates on the selected list view.
+    /// </summary>
     public class UpdateSelectEngine
     {
-        private ListView ListView = null;
+        private readonly ListView ListView = null;
+        /// <summary>
+        /// This constructor will display a list of updates on the provided ListView.
+        /// </summary>
+        /// <param name="ListView">ListView: The list view to display the updates on.</param>
         public UpdateSelectEngine(ListView ListView)
         {
             this.ListView = ListView;
@@ -46,6 +53,9 @@ namespace SuperUpdate.Engines
             ListView.EndUpdate();
             ListView.ResumeLayout();
         }
+        /// <summary>
+        /// This method will dispose all resources and event handlers associated with displaying the updates using the existing list view on the main window.
+        /// </summary>
         public void Dispose()
         {
             ListView.DoubleClick -= ListView_DoubleClick;

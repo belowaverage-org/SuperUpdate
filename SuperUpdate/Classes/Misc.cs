@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace SuperUpdate.Classes
 {
+    /// <summary>
+    /// This class contains miscellaneous methods for use in other classes.
+    /// </summary>
     public static class Misc
     {
         /// <summary>
@@ -40,13 +43,15 @@ namespace SuperUpdate.Classes
             {
                 args += arg + " ";
             }
-            Process proc = new Process();
-            proc.StartInfo = new ProcessStartInfo()
+            Process proc = new Process
             {
-                FileName = Application.ExecutablePath,
-                Arguments = args,
-                Verb = verb,
-                UseShellExecute = true
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = Application.ExecutablePath,
+                    Arguments = args,
+                    Verb = verb,
+                    UseShellExecute = true
+                }
             };
             try
             {

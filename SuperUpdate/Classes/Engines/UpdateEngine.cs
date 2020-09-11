@@ -8,13 +8,29 @@ using System.IO;
 
 namespace SuperUpdate.Engines
 {
+    /// <summary>
+    /// This class determines what version the client software is on, and what the latest update is.
+    /// </summary>
     public class UpdateEngine
     {
+        /// <summary>
+        /// This property contains the current version XmlNode of the client software.
+        /// </summary>
         public static XmlNode CurrentVersion = null;
+        /// <summary>
+        /// This property contains the most up-to-date XmlNode of the client software.
+        /// </summary>
         public static XmlNode LatestVersion = null;
+        /// <summary>
+        /// This property contains a list of available update channels.
+        /// </summary>
         public static List<string> AvailableChannels = new List<string>();
-        private static SHA1 HashObject = SHA1.Create();
-        private static Dictionary<string, string> LocalFiles = new Dictionary<string, string>();
+        private static readonly SHA1 HashObject = SHA1.Create();
+        private static readonly Dictionary<string, string> LocalFiles = new Dictionary<string, string>();
+        /// <summary>
+        /// This method will detect and determine the current software version, and latest update available.
+        /// </summary>
+        /// <returns>Task: Bool: Returns true on success.</returns>
         public async static Task<bool> DetectUpdates()
         {
             AvailableChannels.Clear();

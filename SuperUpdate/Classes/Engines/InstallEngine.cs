@@ -11,14 +11,29 @@ using SuperUpdate.Classes;
 
 namespace SuperUpdate.Engines
 {
+    /// <summary>
+    /// This class is tasked with downloading and running the PowerShell script associated with an update.
+    /// </summary>
     public class InstallEngine
     {
+        /// <summary>
+        /// If this property is true, Super Update will close after the PowerShell script ends.
+        /// </summary>
         public static bool CloseWindowWhenDone = false;
+        /// <summary>
+        /// If this property is true, Super Update will re-launch after the PowerShell script ends.
+        /// </summary>
         public static bool RelaunchWhenDone = false;
+        /// <summary>
+        /// This property stores the selected version from the UpdateSelectEngine.
+        /// </summary>
         public static XmlNode SelectedVersion = null;
-        private PowerShell PS = PowerShell.Create();
-        private Runspace RS = RunspaceFactory.CreateRunspace();
-        private ProgressBar ProgressBar = Program.MainForm.pbMain;
+        private readonly PowerShell PS = PowerShell.Create();
+        private readonly Runspace RS = RunspaceFactory.CreateRunspace();
+        private readonly ProgressBar ProgressBar = Program.MainForm.pbMain;
+        /// <summary>
+        /// This constructs a new instance of InstallEngine.
+        /// </summary>
         public InstallEngine()
         {
             PS.Runspace = RS;
@@ -29,13 +44,21 @@ namespace SuperUpdate.Engines
             PS.Streams.Verbose.DataAdded += Verbose_DataAdded;
             PS.Streams.Information.DataAdded += Information_DataAdded;
             PS.Streams.Progress.DataAdded += Progress_DataAdded;
-            RS.SessionStateProxy.SetVariable("SuperUpdate", new Classes.PSRunspace());
+            RS.SessionStateProxy.SetVariable("SuperUpdate", new PSRunspace());
         }
+        /// <summary>
+        /// This method stops the PowerShell script.
+        /// </summary>
         public void Stop()
         {
             PS.Stop();
             Logger.Log("Installation canceled.", LogLevels.Information);
         }
+        /// <summary>
+        /// This method downloads and then runs the PowerShell script associated with the provided UpdateNode.
+        /// </summary>
+        /// <param name="UpdateNode">XmlNode: The "Update" node of the update to install.</param>
+        /// <returns>Task: Bool: True if successful.</returns>
         public Task<bool> InstallUpdate(XmlNode UpdateNode)
         {
             SelectedVersion = UpdateNode;

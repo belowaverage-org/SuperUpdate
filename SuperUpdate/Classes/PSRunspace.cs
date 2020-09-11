@@ -7,6 +7,10 @@ using SuperUpdate.Log;
 
 namespace SuperUpdate.Classes
 {
+    /// <summary>
+    /// The PowerShell runspace passed to the "install engine's" PowerShell instance.
+    /// This allows the PowerShell script to access these properties and methods from PowerShell.
+    /// </summary>
     public class PSRunspace
     {
         /// <summary>

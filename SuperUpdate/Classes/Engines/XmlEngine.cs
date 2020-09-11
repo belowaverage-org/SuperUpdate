@@ -10,13 +10,30 @@ using System.Net.Http;
 
 namespace SuperUpdate.Engines
 {
+    /// <summary>
+    /// This class is tasked with parsing the XML passed to Super Update.
+    /// </summary>
     public class XmlEngine
     {
+        /// <summary>
+        /// The maximum times the XML engine is allowed to follow a redirect.
+        /// </summary>
         public static int MaxRedirects = 100;
+        /// <summary>
+        /// The XML document pulled from the ReadXML method.
+        /// </summary>
         public static XmlDocument UpdateXML = null;
+        /// <summary>
+        /// The XML Namespace Manager that contains the namespace information for Super Update.
+        /// </summary>
         public static XmlNamespaceManager XNS = null;
         private static int RedirectCount = 0;
-        private static HttpClient HttpClient = new HttpClient();
+        private static readonly HttpClient HttpClient = new HttpClient();
+        /// <summary>
+        /// This method will read the XML at this URI: HTTP, HTTPS, \\, absolute, and relative paths are supported.
+        /// </summary>
+        /// <param name="URI">The URI string of the XML to parse.</param>
+        /// <returns>Task: Bool: Returns true if successful.</returns>
         public static Task<bool> ReadXML(string URI)
         {
             return Task.Run(async () => {
@@ -78,7 +95,7 @@ namespace SuperUpdate.Engines
                 ParseSettingsUI();
             }
         }
-        private static Action ParseSettingsUI = new Action(async () => {
+        private static readonly Action ParseSettingsUI = new Action(async () => {
             Main main = Program.MainForm;
             foreach (XmlNode setting in UpdateXML.SelectNodes("/SU:SuperUpdate/SU:Settings/SU:*", XNS))
             {

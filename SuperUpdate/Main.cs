@@ -12,6 +12,9 @@ using System.Collections.Generic;
 
 namespace SuperUpdate
 {
+    /// <summary>
+    /// The main window class.
+    /// </summary>
     public partial class Main : Form
     {
         /// <summary>
@@ -33,6 +36,9 @@ namespace SuperUpdate
         private bool IsRunning = false;
         private bool IsExpanded = false;
         private bool IsMouseOverArrow = false;
+        /// <summary>
+        /// The constructor for the main window.
+        /// </summary>
         public Main()
         {
             InitializeComponent();
@@ -89,7 +95,7 @@ namespace SuperUpdate
         /// <returns>bool: True on success.</returns>
         private async Task<bool> CheckForUpdates()
         {
-            bool success = true;
+            bool success;
             string xmlUrl = "";
             FileStream fs = File.OpenRead(Process.GetCurrentProcess().MainModule.FileName);
             StreamReader sr = new StreamReader(fs);
@@ -208,7 +214,7 @@ namespace SuperUpdate
         private async void Main_Load(object sender = null, EventArgs e = null)
         {
             Activate();
-            bool success = true;
+            bool success;
             Running = true;
             await GetImagesFromResources();
             Logger.Initialize();
@@ -224,8 +230,8 @@ namespace SuperUpdate
             }
             Program.UpdateSelectEngine = new UpdateSelectEngine(lvDetails);
             Running = AutoRun;
-            lvDetails_SelectedIndexChanged(null, null);
-            if (AutoRun) btnAction_Click(null, null);
+            LV_Details_SelectedIndexChanged(null, null);
+            if (AutoRun) BTN_Action_Click(null, null);
         }
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -247,7 +253,7 @@ namespace SuperUpdate
                 miSaveLog.PerformClick();
             }
         }
-        private async void miSaveLog_Click(object sender, EventArgs e)
+        private async void MI_SaveLog_Click(object sender, EventArgs e)
         {
             diSaveLog.FileName =
             "SuperUpdate_" +
@@ -258,14 +264,14 @@ namespace SuperUpdate
                 await Logger.WriteLog(diSaveLog.OpenFile());
             }
         }
-        private void lvDetails_MouseClick(object sender, MouseEventArgs e)
+        private void LV_Details_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
                 miLog.Show(lvDetails, e.Location);
             }
         }
-        private void lvDetails_SelectedIndexChanged(object sender, EventArgs e)
+        private void LV_Details_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (
                 Program.UpdateSelectEngine != null &&
@@ -274,7 +280,7 @@ namespace SuperUpdate
             ) btnAction.Enabled = true;
             else btnAction.Enabled = false;
         }
-        private async void btnAction_Click(object sender, EventArgs e)
+        private async void BTN_Action_Click(object sender, EventArgs e)
         {
             if (lvDetails.SelectedItems.Count == 0) return;
             Running = true;
@@ -290,21 +296,21 @@ namespace SuperUpdate
             btnAction.Enabled = false;
             btnCancel.Text = "Close";
         }
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BTN_Cancel_Click(object sender, EventArgs e)
         {
             Close();
         }
-        private void pbArrow_MouseEnter(object sender, EventArgs e)
+        private void PB_Arrow_MouseEnter(object sender, EventArgs e)
         {
             IsMouseOverArrow = true;
             pbArrow.Invalidate();
         }
-        private void pbArrow_MouseLeave(object sender, EventArgs e)
+        private void PB_Arrow_MouseLeave(object sender, EventArgs e)
         {
             IsMouseOverArrow = false;
             pbArrow.Invalidate();
         }
-        private void pbArrow_Paint(object sender, PaintEventArgs e)
+        private void PB_Arrow_Paint(object sender, PaintEventArgs e)
         {
             Image arrow = new Bitmap(Properties.Resources.downarrow);
             if (Expanded) arrow.RotateFlip(RotateFlipType.RotateNoneFlipY);

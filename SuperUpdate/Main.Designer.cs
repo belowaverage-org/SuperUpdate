@@ -68,7 +68,7 @@
             this.btnAction.TabIndex = 1;
             this.btnAction.Text = "Install";
             this.btnAction.UseVisualStyleBackColor = true;
-            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
+            this.btnAction.Click += new System.EventHandler(this.BTN_Action_Click);
             // 
             // btnCancel
             // 
@@ -81,7 +81,7 @@
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BTN_Cancel_Click);
             // 
             // wbAnimation
             // 
@@ -120,8 +120,8 @@
             this.lblMoreLessInfo.TabIndex = 4;
             this.lblMoreLessInfo.Text = "Initializing...";
             this.lblMoreLessInfo.Click += new System.EventHandler(this.ExpandContract);
-            this.lblMoreLessInfo.MouseEnter += new System.EventHandler(this.pbArrow_MouseEnter);
-            this.lblMoreLessInfo.MouseLeave += new System.EventHandler(this.pbArrow_MouseLeave);
+            this.lblMoreLessInfo.MouseEnter += new System.EventHandler(this.PB_Arrow_MouseEnter);
+            this.lblMoreLessInfo.MouseLeave += new System.EventHandler(this.PB_Arrow_MouseLeave);
             // 
             // pbArrow
             // 
@@ -131,9 +131,9 @@
             this.pbArrow.TabIndex = 3;
             this.pbArrow.TabStop = false;
             this.pbArrow.Click += new System.EventHandler(this.ExpandContract);
-            this.pbArrow.Paint += new System.Windows.Forms.PaintEventHandler(this.pbArrow_Paint);
-            this.pbArrow.MouseEnter += new System.EventHandler(this.pbArrow_MouseEnter);
-            this.pbArrow.MouseLeave += new System.EventHandler(this.pbArrow_MouseLeave);
+            this.pbArrow.Paint += new System.Windows.Forms.PaintEventHandler(this.PB_Arrow_Paint);
+            this.pbArrow.MouseEnter += new System.EventHandler(this.PB_Arrow_MouseEnter);
+            this.pbArrow.MouseLeave += new System.EventHandler(this.PB_Arrow_MouseLeave);
             // 
             // lvDetails
             // 
@@ -152,8 +152,8 @@
             this.lvDetails.TabIndex = 6;
             this.lvDetails.UseCompatibleStateImageBehavior = false;
             this.lvDetails.View = System.Windows.Forms.View.Details;
-            this.lvDetails.SelectedIndexChanged += new System.EventHandler(this.lvDetails_SelectedIndexChanged);
-            this.lvDetails.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvDetails_MouseClick);
+            this.lvDetails.SelectedIndexChanged += new System.EventHandler(this.LV_Details_SelectedIndexChanged);
+            this.lvDetails.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LV_Details_MouseClick);
             // 
             // miLog
             // 
@@ -165,7 +165,7 @@
             this.miSaveLog.Index = 0;
             this.miSaveLog.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
             this.miSaveLog.Text = "Save log...";
-            this.miSaveLog.Click += new System.EventHandler(this.miSaveLog_Click);
+            this.miSaveLog.Click += new System.EventHandler(this.MI_SaveLog_Click);
             // 
             // diSaveLog
             // 
@@ -219,18 +219,30 @@
 
         #endregion
 
+        /// <summary>
+        /// The status label next to the large icon on the main window.
+        /// </summary>
         public System.Windows.Forms.Label lblMessage;
+        /// <summary>
+        /// The button button next to the "cancel" button on the main window.
+        /// </summary>
         public System.Windows.Forms.Button btnAction;
+        /// <summary>
+        /// The list view on the main window that is visible when the window is expanded.
+        /// </summary>
+        public System.Windows.Forms.ListView lvDetails;
+        /// <summary>
+        /// The progress bar on the main window.
+        /// </summary>
+        public System.Windows.Forms.ProgressBar pbMain;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.WebBrowser wbAnimation;
         private System.Windows.Forms.Panel pnlGray;
         private System.Windows.Forms.PictureBox pbArrow;
         private System.Windows.Forms.Label lblMoreLessInfo;
-        public System.Windows.Forms.ListView lvDetails;
         private System.Windows.Forms.ContextMenu miLog;
         private System.Windows.Forms.MenuItem miSaveLog;
         private System.Windows.Forms.SaveFileDialog diSaveLog;
-        public System.Windows.Forms.ProgressBar pbMain;
     }
 }
 
