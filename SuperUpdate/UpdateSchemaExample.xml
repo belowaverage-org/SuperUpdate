@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <SuperUpdate
-	UpdaterVersion="0"
-	xmlns="http://belowaverage.org/schemas/superupdate/0.0.0.2"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://belowaverage.org/schemas/superupdate/0.0.0.2 https://raw.githubusercontent.com/belowaverage-org/SuperUpdate/master/SuperUpdate/UpdateSchema.xsd"
+    UpdaterVersion="0"
+    xmlns="http://belowaverage.org/schemas/superupdate/0.0.0.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://belowaverage.org/schemas/superupdate/0.0.0.2 https://raw.githubusercontent.com/belowaverage-org/SuperUpdate/master/SuperUpdate/UpdateSchema.xsd"
 >
   <Settings>
     <Redirect RedirectURL="https://static.belowaverage.org/software/SuperUpdate/SuperUpdate/1.1.1.1/Update.xml" UpdaterVersion="0" />
@@ -11,9 +11,9 @@
     <WindowIcon URL="https://asdf.com/icon.ico" />
     <WindowIconLarge URL="https://asdf.com/icon.ico" />
     <WindowIconLargeAnimated URL="https://asdf.com/icon.gif" />
-	<MessageNoUpdate Text="You are already up to date!"/>
-	<RequireElevation Value="false" />
-	<AutoRun Value="false" />
+    <MessageNoUpdate Text="You are already up to date!"/>
+    <RequireElevation Value="false" />
+    <AutoRun Value="false" />
   </Settings>
   <Updates>
     <Update Version="1.1.1.1" DateTime="2000-01-01T00:00:00" Channel="Release" ReleaseInfoURL="https://github.com/belowaverage-org/SuperUpdate/releases/tag/1.1.1.1" ScriptURL="https://static.belowaverage.org/software/SuperUpdate/SuperUpdate/1.1.1.1/Update.ps1" UpdateMessage="2019 Update Available!">
