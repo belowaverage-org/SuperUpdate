@@ -79,6 +79,22 @@ namespace SuperUpdate.Classes
             }
         }
         /// <summary>
+        /// Gets / sets the TopMost status of the main window. True means that the main window is always on top.
+        /// </summary>
+        public bool WindowTopMost
+        {
+            get
+            {
+                return Program.MainForm.TopMost;
+            }
+            set
+            {
+                Program.MainForm.Invoke(new Action(() => {
+                    Program.MainForm.TopMost = value;
+                }));
+            }
+        }
+        /// <summary>
         /// Get / set this variable to specify whether or not to close SuperUpdate once the PowerShell script finishes.
         /// </summary>
         public bool CloseWindowWhenDone
