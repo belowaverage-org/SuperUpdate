@@ -57,6 +57,7 @@ namespace SuperUpdate
                 IsRunning = value;
                 if (IsRunning)
                 {
+                    btnAction.Enabled = false;
                     pbMain.Style = ProgressBarStyle.Marquee;
                 }
                 else
@@ -283,6 +284,7 @@ namespace SuperUpdate
         private async void BTN_Action_Click(object sender, EventArgs e)
         {
             if (lvDetails.SelectedItems.Count == 0) return;
+            btnAction.Enabled = false;
             Running = true;
             Program.InstallEngine = new InstallEngine();
             Task<bool> install = Program.InstallEngine.InstallUpdate((XmlNode)lvDetails.SelectedItems[0].Tag);
@@ -293,7 +295,6 @@ namespace SuperUpdate
             }
             if (!await install) Logger.Log("Something went wrong, press \"More details\" for more details.", LogLevels.Information);
             Running = false;
-            btnAction.Enabled = false;
             btnCancel.Text = "Close";
         }
         private void BTN_Cancel_Click(object sender, EventArgs e)
