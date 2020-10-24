@@ -57,7 +57,6 @@ namespace SuperUpdate
                 IsRunning = value;
                 if (IsRunning)
                 {
-                    btnAction.Enabled = false;
                     pbMain.Style = ProgressBarStyle.Marquee;
                 }
                 else
